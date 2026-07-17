@@ -1,0 +1,397 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="winklemad - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 9 merged pull requests across OpenAI, Meta, Microsoft, Google, and more.">
+<meta property="og:title" content="winklemad - I find and fix bugs in the code the world runs on">
+<meta property="og:description" content="9 merged pull requests across OpenAI, Meta, Microsoft, Google, and more - plus 50+ in review.">
+<meta property="og:type" content="website">
+<title>winklemad — I find and fix bugs in the code the world runs on</title>
+<style>
+  :root {
+    --bg: #F5F7F9;
+    --surface: #FFFFFF;
+    --ink: #1A1F26;
+    --muted: #58636F;
+    --faint: #8A94A0;
+    --merge: #1A9E57;
+    --merge-bg: rgba(26, 158, 87, 0.09);
+    --bug: #C63A43;
+    --bug-bg: rgba(198, 58, 67, 0.07);
+    --line: #E2E7EC;
+    --line-strong: #D2D9E0;
+    --shadow: 0 1px 2px rgba(16, 24, 40, .04), 0 8px 24px rgba(16, 24, 40, .05);
+    --mono: ui-monospace, "SF Mono", "SFMono-Regular", Menlo, "Cascadia Code", "Roboto Mono", Consolas, monospace;
+    --sans: ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0B0E13;
+      --surface: #12161D;
+      --ink: #D8DFE8;
+      --muted: #8492A0;
+      --faint: #5C6673;
+      --merge: #3FD07F;
+      --merge-bg: rgba(63, 208, 127, 0.10);
+      --bug: #FF6B72;
+      --bug-bg: rgba(255, 107, 114, 0.09);
+      --line: #20262F;
+      --line-strong: #2A313B;
+      --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #F5F7F9; --surface: #FFFFFF; --ink: #1A1F26; --muted: #58636F; --faint: #8A94A0;
+    --merge: #1A9E57; --merge-bg: rgba(26,158,87,.09); --bug: #C63A43; --bug-bg: rgba(198,58,67,.07);
+    --line: #E2E7EC; --line-strong: #D2D9E0; --shadow: 0 1px 2px rgba(16,24,40,.04), 0 8px 24px rgba(16,24,40,.05);
+  }
+  :root[data-theme="dark"] {
+    --bg: #0B0E13; --surface: #12161D; --ink: #D8DFE8; --muted: #8492A0; --faint: #5C6673;
+    --merge: #3FD07F; --merge-bg: rgba(63,208,127,.10); --bug: #FF6B72; --bug-bg: rgba(255,107,114,.09);
+    --line: #20262F; --line-strong: #2A313B; --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0; background: var(--bg); color: var(--ink);
+    font-family: var(--sans); line-height: 1.6;
+    font-feature-settings: "kern" 1;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+  a { color: inherit; }
+
+  /* ── decorative top hairline that fades ── */
+  .rule { height: 1px; background: linear-gradient(90deg, transparent, var(--line-strong) 12%, var(--line-strong) 88%, transparent); border: 0; margin: 0; }
+
+  .mono { font-family: var(--mono); }
+  .label {
+    font-family: var(--mono); font-size: 12px; letter-spacing: .14em;
+    text-transform: uppercase; color: var(--muted); font-weight: 600;
+  }
+
+  /* ─────────────── HERO ─────────────── */
+  header.hero { padding: 72px 0 40px; }
+  .prompt {
+    font-family: var(--mono); font-size: 13.5px; color: var(--muted);
+    margin: 0 0 26px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+  }
+  .prompt .sig { color: var(--merge); }
+  .prompt .cmd { color: var(--ink); }
+  .cursor {
+    display: inline-block; width: 8px; height: 1.05em; translate: 0 2px;
+    background: var(--merge); animation: blink 1.15s steps(1) infinite;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  h1.thesis {
+    font-family: var(--mono); font-weight: 600;
+    font-size: clamp(28px, 5.2vw, 46px); line-height: 1.12; letter-spacing: -0.01em;
+    margin: 0 0 30px; text-wrap: balance; max-width: 20ch;
+  }
+  h1.thesis .lo { color: var(--faint); }
+
+  .diff-sig {
+    font-family: var(--mono); font-size: clamp(13px, 2.1vw, 15px);
+    border: 1px solid var(--line); border-radius: 8px; background: var(--surface);
+    overflow: hidden; box-shadow: var(--shadow); max-width: 640px;
+  }
+  .diff-sig .dl { padding: 11px 16px 11px 14px; display: flex; gap: 12px; align-items: baseline; }
+  .diff-sig .dl + .dl { border-top: 1px solid var(--line); }
+  .diff-sig .mark { font-weight: 700; flex: none; width: 1ch; }
+  .dl.minus { background: var(--bug-bg); }
+  .dl.minus .mark { color: var(--bug); }
+  .dl.plus { background: var(--merge-bg); }
+  .dl.plus .mark { color: var(--merge); }
+  .dl .txt { color: var(--ink); }
+  .dl.minus .txt { color: color-mix(in srgb, var(--ink) 80%, var(--bug)); }
+
+  /* ─────────────── STATS ─────────────── */
+  section.stats { padding: 46px 0; }
+  .statgrid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); border-radius: 10px; overflow: hidden; }
+  .stat { background: var(--surface); padding: 22px 18px; }
+  .stat .n { font-family: var(--mono); font-size: 30px; font-weight: 600; letter-spacing: -.02em; font-variant-numeric: tabular-nums; color: var(--ink); }
+  .stat .n .u { color: var(--merge); }
+  .stat .k { font-size: 12.5px; color: var(--muted); margin-top: 3px; }
+  @media (max-width: 620px) { .statgrid { grid-template-columns: repeat(2, 1fr); } }
+
+  /* ─────────────── SECTION HEADS ─────────────── */
+  .sec-head { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin: 8px 0 22px; }
+  .sec-head h2 { font-family: var(--mono); font-size: 15px; font-weight: 600; letter-spacing: .02em; margin: 0; color: var(--ink); }
+  .sec-head .aside { font-size: 12.5px; color: var(--faint); font-family: var(--mono); }
+
+  section.work { padding: 30px 0 10px; }
+
+  /* ─────────────── CONTRIBUTION CARDS ─────────────── */
+  .fixes { display: flex; flex-direction: column; gap: 14px; }
+  .fix {
+    border: 1px solid var(--line); border-radius: 10px; background: var(--surface);
+    overflow: hidden; box-shadow: var(--shadow);
+    opacity: 0; transform: translateY(10px);
+  }
+  .fix.in { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.3,1); }
+  .fix .top { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
+  .fix .org { font-weight: 700; font-size: 14.5px; color: var(--ink); letter-spacing: -.01em; }
+  .fix .repo { font-family: var(--mono); font-size: 12.5px; color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--line-strong); }
+  .fix .repo:hover { color: var(--merge); border-bottom-color: var(--merge); }
+  .fix .spacer { flex: 1 1 auto; }
+  .pill {
+    font-family: var(--mono); font-size: 11px; font-weight: 700; letter-spacing: .08em;
+    color: var(--merge); background: var(--merge-bg); border: 1px solid color-mix(in srgb, var(--merge) 35%, transparent);
+    padding: 3px 9px; border-radius: 999px; display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+  }
+  .pill .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--merge); }
+  .fix .body { font-family: var(--mono); font-size: 13.5px; }
+  .fix .dline { padding: 9px 16px; display: flex; gap: 12px; align-items: baseline; }
+  .fix .dline .mark { flex: none; width: 1ch; font-weight: 700; }
+  .fix .dline.m { background: var(--bug-bg); }
+  .fix .dline.m .mark { color: var(--bug); }
+  .fix .dline.m .t { color: color-mix(in srgb, var(--ink) 82%, var(--bug)); }
+  .fix .dline.p { background: var(--merge-bg); border-top: 1px solid var(--line); }
+  .fix .dline.p .mark { color: var(--merge); }
+  .fix .dline.p .t { color: var(--ink); }
+  .fix .t code { font-family: var(--mono); background: color-mix(in srgb, var(--ink) 8%, transparent); padding: .5px 4px; border-radius: 4px; font-size: .94em; }
+
+  /* ─────────────── IN REVIEW ─────────────── */
+  section.review { padding: 44px 0; }
+  .orgcloud { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    font-family: var(--mono); font-size: 12.5px; color: var(--muted);
+    border: 1px solid var(--line); background: var(--surface); border-radius: 7px;
+    padding: 6px 11px;
+  }
+  .chip.more { color: var(--merge); border-color: color-mix(in srgb, var(--merge) 40%, var(--line)); text-decoration: none; }
+  .chip.more:hover { background: var(--merge-bg); }
+
+  /* ─────────────── STACK ─────────────── */
+  section.stack { padding: 12px 0 44px; }
+  .stackrow { display: grid; grid-template-columns: 130px 1fr; gap: 14px 24px; align-items: baseline; }
+  .stackrow + .stackrow { margin-top: 14px; padding-top: 14px; border-top: 1px solid var(--line); }
+  .stackrow .k { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .stackrow .v { color: var(--ink); font-size: 15px; }
+  .stackrow .v b { font-weight: 600; }
+  @media (max-width: 560px) { .stackrow { grid-template-columns: 1fr; gap: 4px; } .stackrow + .stackrow { margin-top: 12px; } }
+
+  /* ─────────────── CTA / FOOTER ─────────────── */
+  section.cta { padding: 30px 0 20px; }
+  .cta-card {
+    border: 1px solid var(--line); border-radius: 12px; background: var(--surface);
+    padding: 34px 30px; box-shadow: var(--shadow);
+  }
+  .cta-card h3 { font-family: var(--mono); font-size: clamp(19px, 3vw, 24px); font-weight: 600; margin: 0 0 10px; letter-spacing: -.01em; text-wrap: balance; }
+  .cta-card p { color: var(--muted); margin: 0 0 22px; max-width: 56ch; }
+  .btns { display: flex; flex-wrap: wrap; gap: 10px; }
+  .btn {
+    font-family: var(--mono); font-size: 13.5px; text-decoration: none; font-weight: 600;
+    padding: 10px 16px; border-radius: 8px; display: inline-flex; align-items: center; gap: 8px;
+    border: 1px solid var(--line-strong); color: var(--ink); background: transparent;
+    transition: border-color .15s, color .15s, background .15s;
+  }
+  .btn:hover { border-color: var(--merge); color: var(--merge); }
+  .btn.primary { background: var(--merge); color: #05130B; border-color: var(--merge); }
+  :root[data-theme="light"] .btn.primary { color: #FFFFFF; }
+  @media (prefers-color-scheme: light) { .btn.primary { color: #FFFFFF; } }
+  .btn.primary:hover { filter: brightness(1.06); color: #05130B; }
+  :root[data-theme="light"] .btn.primary:hover { color: #FFFFFF; }
+
+  footer { padding: 40px 0 56px; }
+  footer .fl { display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+  footer a { color: var(--muted); text-decoration: none; }
+  footer a:hover { color: var(--merge); }
+
+  a:focus-visible, .repo:focus-visible { outline: 2px solid var(--merge); outline-offset: 3px; border-radius: 3px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cursor { animation: none; }
+    .fix { opacity: 1; transform: none; }
+    * { transition: none !important; }
+  }
+</style>
+</head>
+<body>
+<hr class="rule" />
+<div class="wrap">
+
+  <header class="hero">
+    <p class="prompt mono"><span class="sig">winklemad</span><span>:~$</span><span class="cmd">git log --author=winklemad --state=merged</span><span class="cursor" aria-hidden="true"></span></p>
+    <h1 class="thesis">I find and fix real bugs in the code <span class="lo">the world runs on.</span></h1>
+    <div class="diff-sig" role="img" aria-label="Diff: minus, subtle bugs hide in the infrastructure everyone depends on. Plus, I find them by reading the source and ship the fix with a test.">
+      <div class="dl minus"><span class="mark">-</span><span class="txt">subtle bugs hide in the infrastructure everyone depends on</span></div>
+      <div class="dl plus"><span class="mark">+</span><span class="txt">I find them by reading the source — and ship the fix, with a test</span></div>
+    </div>
+  </header>
+
+  <section class="stats" aria-label="By the numbers">
+    <div class="statgrid">
+      <div class="stat"><div class="n">9</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">50<span class="u">+</span></div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">40<span class="u">+</span></div><div class="k">organizations</div></div>
+      <div class="stat"><div class="n">5</div><div class="k">languages</div></div>
+    </div>
+  </section>
+
+  <section class="work" aria-labelledby="merged-h">
+    <div class="sec-head">
+      <h2 id="merged-h">// merged fixes</h2>
+      <span class="aside">org · pr · what changed</span>
+    </div>
+    <div class="fixes">
+
+      <article class="fix">
+        <div class="top"><span class="org">OpenAI</span><a class="repo" href="https://github.com/openai/openai-agents-python/pull/3763">openai-agents-python#3763</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Chat Completions dropped <code>logprobs=True</code> when <code>top_logprobs</code> was set → API returned a 400</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Forward <code>logprobs=True</code> whenever <code>top_logprobs</code> is present, matching the Responses path</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">OpenAI</span><a class="repo" href="https://github.com/openai/openai-agents-js/pull/1451">openai-agents-js#1451</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Deserializing a <code>RunState</code> lost token usage → resumed runs silently under-reported usage (billing)</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Restore the serialized usage when rebuilding the run context</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Meta</span><a class="repo" href="https://github.com/facebookresearch/xformers/pull/1402">facebookresearch/xformers#1402</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The attention profiler over-counted <code>softmax@V</code> FLOPs for non-square causal masks</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Count the <code>Q@K</code> and <code>A@V</code> components symmetrically</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Microsoft</span><a class="repo" href="https://github.com/deepspeedai/DeepSpeed/pull/8145">deepspeedai/DeepSpeed#8145</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>DeepSpeedInferenceConfig</code> crashed on a legacy boolean MoE value its own back-compat path was meant to accept</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Accept the legacy value instead of asserting on it</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Google</span><a class="repo" href="https://github.com/google-research/timesfm/pull/463">google-research/timesfm#463</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Quantile-flip invariance skipped the autoregressive branch → corrupted forecast bands past horizon 128</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Flip the AR outputs too, matching the reference flax implementation</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">carapaceproxy</span><a class="repo" href="https://github.com/diennea/carapaceproxy/pull/614">diennea/carapaceproxy#614</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Absolute-form request URIs bypassed a path-anchored ACL deny rule — an auth bypass (CWE-436 / CWE-863)</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Match ACL rules on the normalized forwarded path</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">pydantic</span><a class="repo" href="https://github.com/pydantic/pydantic/pull/13428">pydantic/pydantic#13428</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>__hash__</code> on <code>WithJsonSchema</code> / <code>Examples</code> ignored the <code>mode</code> value → distinct schemas collided</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Include <code>mode</code> in the hash</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Unsloth</span><a class="repo" href="https://github.com/unslothai/unsloth/pull/7073">unslothai/unsloth#7073</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>SyntheticDataKit.chunk_data</code> emitted chunks over the requested <code>max_tokens</code></span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Respect the token limit when splitting</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Mistral</span><a class="repo" href="https://github.com/mistralai/mistral-common/pull/262">mistralai/mistral-common#262</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The <code>seed</code> field was dropped when bridging a <code>SpeechRequest</code> into the OpenAI format</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Carry <code>seed</code> through the conversion</span></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section class="review" aria-labelledby="review-h">
+    <div class="sec-head">
+      <h2 id="review-h">// currently in review</h2>
+      <span class="aside">50+ open</span>
+    </div>
+    <div class="orgcloud">
+      <span class="chip">NVIDIA</span>
+      <span class="chip">Apple</span>
+      <span class="chip">Anthropic</span>
+      <span class="chip">Google DeepMind</span>
+      <span class="chip">Hugging Face</span>
+      <span class="chip">Redis</span>
+      <span class="chip">Qdrant</span>
+      <span class="chip">Spotify</span>
+      <span class="chip">Supabase</span>
+      <span class="chip">scikit-learn</span>
+      <span class="chip">vLLM</span>
+      <span class="chip">IBM</span>
+      <span class="chip">MLflow</span>
+      <span class="chip">Nushell</span>
+      <span class="chip">OpenSearch</span>
+      <span class="chip">Scrapy</span>
+      <span class="chip">Keras</span>
+      <span class="chip">Ollama</span>
+      <span class="chip">Dask</span>
+      <a class="chip more" href="https://github.com/search?q=author%3Awinklemad+is%3Apr&type=pullrequests">see all →</a>
+    </div>
+  </section>
+
+  <section class="stack" aria-labelledby="stack-h">
+    <div class="sec-head"><h2 id="stack-h">// how i work</h2></div>
+    <div class="stackrow"><div class="k">Languages</div><div class="v">Python · TypeScript / JavaScript · Rust · Go · Java</div></div>
+    <div class="stackrow"><div class="k">Domains</div><div class="v">AI / ML infrastructure · LLM &amp; agent tooling · databases · backend APIs · data engineering · systems · application security</div></div>
+    <div class="stackrow"><div class="k">Method</div><div class="v"><b>Read the source → reproduce red → fix the whole bug class → prove it with a test → ship.</b></div></div>
+  </section>
+
+  <section class="cta">
+    <div class="cta-card">
+      <h3>Open to backend, infrastructure &amp; AI-platform roles.</h3>
+      <p>If your team values deep debugging and shipping across a broad stack — the kind of work above — let's talk.</p>
+      <div class="btns">
+        <a class="btn primary" href="mailto:winklemad@outlook.com">✉ Email me</a>
+        <a class="btn" href="https://github.com/winklemad">GitHub ↗</a>
+        <a class="btn" href="https://github.com/search?q=author%3Awinklemad+is%3Apr&type=pullrequests">All pull requests ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <hr class="rule" style="margin-bottom:32px" />
+    <div class="fl">
+      <span>winklemad · fixes, not typos</span>
+      <span><a href="https://github.com/winklemad">github.com/winklemad</a></span>
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  (function () {
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var cards = document.querySelectorAll('.fix');
+    if (reduce || !('IntersectionObserver' in window)) {
+      cards.forEach(function (c) { c.classList.add('in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          var el = e.target;
+          var i = +el.dataset.i || 0;
+          setTimeout(function () { el.classList.add('in'); }, Math.min(i, 6) * 55);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+    cards.forEach(function (c, i) { c.dataset.i = i; io.observe(c); });
+  })();
+</script>
+</body>
+</html>
