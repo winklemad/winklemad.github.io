@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 9 merged pull requests across OpenAI, Meta, Microsoft, Google, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 13 merged pull requests across OpenAI, Meta, Microsoft, Google, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="9 merged pull requests across OpenAI, Meta, Microsoft, Google, and more - plus 50+ in review.">
+<meta property="og:description" content="13 merged pull requests across OpenAI, Meta, Microsoft, Google, and more - plus 50+ in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -178,6 +178,19 @@
   .stackrow .v b { font-weight: 600; }
   @media (max-width: 560px) { .stackrow { grid-template-columns: 1fr; gap: 4px; } .stackrow + .stackrow { margin-top: 12px; } }
 
+  /* ─────────────── SHIPPED / BUILD ─────────────── */
+  section.build { padding: 44px 0 0; }
+  .build .fix { opacity: 1; transform: none; }
+  .build .glabel { font-family: var(--mono); font-size: 12.5px; color: var(--muted); }
+  .build .buildbody { padding: 15px 16px 16px; }
+  .build .bd { margin: 0 0 15px; color: var(--ink); font-size: 14px; line-height: 1.62; }
+  .build .bd b { font-weight: 600; }
+  .build .srow { display: grid; grid-template-columns: 96px 1fr; gap: 5px 18px; align-items: baseline; font-size: 13px; }
+  .build .srow + .srow { margin-top: 9px; }
+  .build .srow .k { font-family: var(--mono); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: var(--faint); }
+  .build .srow .v { color: var(--muted); }
+  @media (max-width: 560px){ .build .srow { grid-template-columns: 1fr; gap: 2px; } }
+
   /* ─────────────── CTA / FOOTER ─────────────── */
   section.cta { padding: 30px 0 20px; }
   .cta-card {
@@ -230,10 +243,10 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">9</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">13</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">50<span class="u">+</span></div><div class="k">in review</div></div>
       <div class="stat"><div class="n">40<span class="u">+</span></div><div class="k">organizations</div></div>
-      <div class="stat"><div class="n">5</div><div class="k">languages</div></div>
+      <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
   </section>
 
@@ -316,6 +329,38 @@
         </div>
       </article>
 
+      <article class="fix">
+        <div class="top"><span class="org">Vue</span><a class="repo" href="https://github.com/vuejs/pinia/pull/3162">vuejs/pinia#3162</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Hydrating a store merged incoming reactive <code>Set</code> / <code>Map</code> state into the existing value instead of replacing it → stale entries survived</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Replace the reactive <code>Set</code> / <code>Map</code> on hydration</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Prefect</span><a class="repo" href="https://github.com/PrefectHQ/fastmcp/pull/4492">PrefectHQ/fastmcp#4492</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>compress_schema</code> mutated the caller's schema object in place → side effects on the passed-in data</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Copy before modifying, leaving the caller's schema untouched</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">uutils · Rust</span><a class="repo" href="https://github.com/uutils/coreutils/pull/13439">uutils/coreutils#13439</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>paste -s -d</code> didn't restart the delimiter cycle per file → output diverged from GNU coreutils</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Reset the delimiter list at the start of each file</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">htop · C</span><a class="repo" href="https://github.com/htop-dev/htop/pull/2046">htop-dev/htop#2046</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A reset-on-fork scheduling flag was <code>&amp;=</code>-ed instead of <code>|=</code>-ed → the policy was zeroed on every set</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t"><code>OR</code> the <code>SCHED_RESET_ON_FORK</code> bit into the policy</span></div>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -346,6 +391,26 @@
       <span class="chip">Dask</span>
       <a class="chip more" href="https://github.com/search?q=author%3Awinklemad+is%3Apr&type=pullrequests">see all →</a>
     </div>
+  </section>
+
+  <section class="build" aria-labelledby="build-h">
+    <div class="sec-head">
+      <h2 id="build-h">// shipped solo</h2>
+      <span class="aside">product · &lt; 90 days</span>
+    </div>
+    <article class="fix in">
+      <div class="top">
+        <span class="org">PhantomAI</span>
+        <span class="glabel">multichannel LLM gateway</span>
+        <span class="spacer"></span>
+        <span class="pill"><span class="dot"></span>SHIPPED</span>
+      </div>
+      <div class="buildbody">
+        <p class="bd">One workspace and a REST API that route across <b>9 model providers</b> — OpenAI, Anthropic, Google, Mistral, DeepSeek, xAI, Azure, OpenRouter, and Ollama — with streaming responses, isolated per-user API keys, and a Stripe-metered, per-model credit-billing system. Built end to end, <b>solo, in under 90 days</b>.</p>
+        <div class="srow"><div class="k">Frontend</div><div class="v">React 18 · Vite · TypeScript · shadcn-ui / Tailwind · Next.js</div></div>
+        <div class="srow"><div class="k">Backend</div><div class="v">Supabase (Postgres · row-level security · Edge Functions) · Stripe · Vercel</div></div>
+      </div>
+    </article>
   </section>
 
   <section class="stack" aria-labelledby="stack-h">
