@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 15 merged pull requests across OpenAI, Meta, Microsoft, Google, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 16 merged pull requests across OpenAI, Meta, Microsoft, Google, jq, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="15 merged pull requests across OpenAI, Meta, Microsoft, Google, and more - plus 60+ in review.">
+<meta property="og:description" content="16 merged pull requests across OpenAI, Meta, Microsoft, Google, jq, and more - plus 60+ in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -243,7 +243,7 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">15</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">16</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">60<span class="u">+</span></div><div class="k">in review</div></div>
       <div class="stat"><div class="n">40<span class="u">+</span></div><div class="k">organizations</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
@@ -374,6 +374,14 @@
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">The digest name filter rendered "and 0 others" when <code>maxNames</code> already covered every item</span></div>
           <div class="dline p"><span class="mark">+</span><span class="t">Omit the suffix when no names remain</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">jq · C</span><a class="repo" href="https://github.com/jqlang/jq/pull/3586">jqlang/jq#3586</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A zero-width global regex match advanced one code unit, not the whole Unicode codepoint — <code>["🚀" | match(""; "g")] | length</code> miscounted multi-byte chars</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Advance past the full codepoint after a zero-width match</span></div>
         </div>
       </article>
 
