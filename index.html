@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 13 merged pull requests across OpenAI, Meta, Microsoft, Google, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 15 merged pull requests across OpenAI, Meta, Microsoft, Google, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="13 merged pull requests across OpenAI, Meta, Microsoft, Google, and more - plus 50+ in review.">
+<meta property="og:description" content="15 merged pull requests across OpenAI, Meta, Microsoft, Google, and more - plus 60+ in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -243,8 +243,8 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">13</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">50<span class="u">+</span></div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">15</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">60<span class="u">+</span></div><div class="k">in review</div></div>
       <div class="stat"><div class="n">40<span class="u">+</span></div><div class="k">organizations</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
@@ -361,13 +361,29 @@
         </div>
       </article>
 
+      <article class="fix">
+        <div class="top"><span class="org">psycopg · Python</span><a class="repo" href="https://github.com/psycopg/psycopg/pull/1373">psycopg/psycopg#1373</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Two <code>DataError</code> messages were missing the <code>f</code> prefix → <code>{...}</code> placeholders printed as literal braces</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Add the f-string prefix so the offending values interpolate</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Novu</span><a class="repo" href="https://github.com/novuhq/novu/pull/11984">novuhq/novu#11984</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The digest name filter rendered "and 0 others" when <code>maxNames</code> already covered every item</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Omit the suffix when no names remain</span></div>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <section class="review" aria-labelledby="review-h">
     <div class="sec-head">
       <h2 id="review-h">// currently in review</h2>
-      <span class="aside">50+ open</span>
+      <span class="aside">60+ open</span>
     </div>
     <div class="orgcloud">
       <span class="chip">NVIDIA</span>
@@ -383,7 +399,7 @@
       <span class="chip">vLLM</span>
       <span class="chip">IBM</span>
       <span class="chip">MLflow</span>
-      <span class="chip">Nushell</span>
+      <span class="chip">Microsoft</span>
       <span class="chip">OpenSearch</span>
       <span class="chip">Scrapy</span>
       <span class="chip">Keras</span>
@@ -429,6 +445,7 @@
         <a class="btn" href="https://github.com/winklemad">GitHub ↗</a>
         <a class="btn" href="https://www.linkedin.com/in/winklemad/">LinkedIn ↗</a>
         <a class="btn" href="https://x.com/winklemad">X ↗</a>
+        <a class="btn" href="https://github.com/sponsors/winklemad">♥ Sponsor ↗</a>
         <a class="btn" href="https://github.com/search?q=author%3Awinklemad+is%3Apr&type=pullrequests">All pull requests ↗</a>
       </div>
     </div>
