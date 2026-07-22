@@ -130,37 +130,65 @@
 
   /* ─────────────── MERGED-WORK FILTERS ─────────────── */
   .filter-panel {
-    margin: -4px 0 18px; padding: 14px; border: 1px solid var(--line);
+    position: relative; margin: -4px 0 18px; padding: 14px; border: 1px solid var(--line);
     border-radius: 10px; background: var(--surface); box-shadow: var(--shadow);
   }
-  .filter-primary { display: flex; gap: 8px; margin-bottom: 13px; }
+  .filter-actions { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 8px; }
+  .company-trigger,
+  .filter-btn {
+    min-height: 42px; display: inline-flex; align-items: center; gap: 9px;
+    border: 1px solid var(--line-strong); border-radius: 8px; padding: 7px 12px;
+    color: var(--muted); background: var(--bg); font: 600 12px/1 var(--mono);
+    cursor: pointer; transition: color .15s, border-color .15s, background .15s, transform .15s;
+  }
+  .company-trigger { justify-content: flex-start; text-align: left; }
+  .company-trigger .chevron { margin-left: auto; color: var(--faint); transition: transform .15s; }
+  .company-trigger[aria-expanded="true"] .chevron { transform: rotate(180deg); }
+  .company-trigger:hover,
+  .filter-btn:hover { color: var(--ink); border-color: var(--merge); }
+  .company-trigger:focus-visible,
+  .filter-btn:focus-visible { outline: 2px solid var(--merge); outline-offset: 2px; }
+  .company-menu {
+    position: absolute; z-index: 20; top: calc(100% - 7px); left: 14px; right: 14px;
+    padding: 12px; border: 1px solid var(--line-strong); border-radius: 10px;
+    background: var(--surface); box-shadow: 0 18px 50px color-mix(in srgb, var(--ink) 18%, transparent);
+  }
+  .company-menu[hidden] { display: none; }
   .filter-label {
-    margin: 0 0 8px; color: var(--faint); font-family: var(--mono);
+    margin: 0 0 10px; color: var(--faint); font-family: var(--mono);
     font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
   }
   .company-filters {
-    display: flex; gap: 8px; overflow-x: auto; padding: 1px 1px 7px;
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px;
+    max-height: 360px; overflow-y: auto; padding: 1px 5px 1px 1px;
     scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;
-    scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
   }
-  .company-filters::-webkit-scrollbar { height: 5px; }
+  .company-filters::-webkit-scrollbar { width: 5px; }
   .company-filters::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; }
   .filter-btn {
-    min-height: 36px; display: inline-flex; align-items: center; gap: 8px; flex: none;
-    border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 11px;
-    color: var(--muted); background: var(--bg); font: 600 12px/1 var(--mono);
-    cursor: pointer; scroll-snap-align: start; transition: color .15s, border-color .15s, background .15s, transform .15s;
+    width: 100%; min-width: 0; min-height: 42px; padding: 6px 9px; border-radius: 7px;
   }
-  .filter-btn:hover { color: var(--ink); border-color: var(--merge); transform: translateY(-1px); }
   .filter-btn[aria-pressed="true"] { color: var(--merge); border-color: var(--merge); background: var(--merge-bg); }
-  .filter-btn:focus-visible { outline: 2px solid var(--merge); outline-offset: 2px; }
-  .filter-btn img { width: 22px; height: 22px; border-radius: 6px; object-fit: cover; background: var(--surface); }
-  .filter-btn .symbol { width: 22px; text-align: center; color: var(--merge); font-size: 15px; }
+  .filter-btn .avatar {
+    position: relative; width: 24px; height: 24px; flex: none; display: grid; place-items: center;
+    border-radius: 6px; overflow: hidden; background: color-mix(in srgb, var(--merge) 14%, var(--surface));
+    color: var(--merge); font-size: 10px;
+  }
+  .filter-btn .avatar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--surface); }
+  .filter-btn .name { min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .filter-btn .symbol, .company-trigger .symbol { width: 22px; text-align: center; color: var(--merge); font-size: 15px; }
   .filter-btn .count {
-    min-width: 18px; padding: 2px 5px; border-radius: 999px; text-align: center;
+    min-width: 18px; margin-left: auto; padding: 2px 5px; border-radius: 999px; text-align: center;
     color: var(--faint); background: color-mix(in srgb, var(--ink) 7%, transparent); font-size: 10px;
   }
+  .all-filter { width: auto; white-space: nowrap; }
   .filter-summary { min-height: 20px; margin: 0 2px 16px; color: var(--muted); font: 12px/1.5 var(--mono); }
+  .filter-empty {
+    padding: 26px 18px; border: 1px dashed var(--line-strong); border-radius: 10px;
+    color: var(--muted); background: color-mix(in srgb, var(--surface) 86%, transparent);
+    font: 13px/1.6 var(--mono); text-align: center;
+  }
+  .filter-empty[hidden] { display: none; }
 
   /* ─────────────── CONTRIBUTION CARDS ─────────────── */
   .fixes { display: flex; flex-direction: column; gap: 14px; }
@@ -194,8 +222,10 @@
   .fix .t code { font-family: var(--mono); background: color-mix(in srgb, var(--ink) 8%, transparent); padding: .5px 4px; border-radius: 4px; font-size: .94em; }
   @media (max-width: 560px) {
     .filter-panel { margin-inline: -4px; padding: 12px; }
-    .filter-primary { display: grid; grid-template-columns: 1fr 1fr; }
-    .filter-primary .filter-btn { justify-content: center; }
+    .filter-actions { grid-template-columns: 1fr; }
+    .all-filter { width: 100%; justify-content: center; }
+    .company-menu { left: 12px; right: 12px; }
+    .company-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); max-height: 340px; }
   }
 
   /* ─────────────── IN REVIEW ─────────────── */
@@ -296,18 +326,21 @@
       <span class="aside">filter by organization</span>
     </div>
     <div class="filter-panel">
-      <div class="filter-primary" role="group" aria-label="Contribution views">
-        <button class="filter-btn" type="button" data-filter="featured" aria-pressed="true" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">✦</span><span>Featured</span><span class="count">8</span>
+      <div class="filter-actions">
+        <button class="company-trigger" id="company-menu-toggle" type="button" aria-expanded="false" aria-controls="company-menu">
+          <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
-        <button class="filter-btn" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All fixes</span><span class="count">27</span>
+        <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
+          <span class="symbol" aria-hidden="true">↳</span><span>All 27 fixes</span>
         </button>
       </div>
-      <div class="filter-label">Choose a company — swipe or scroll</div>
-      <div class="company-filters" id="company-filters" role="group" aria-label="Filter merged fixes by company"></div>
+      <div class="company-menu" id="company-menu" hidden>
+        <div class="filter-label">Select an organization</div>
+        <div class="company-filters" id="company-filters" role="group" aria-label="Filter merged fixes by company"></div>
+      </div>
     </div>
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
+    <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
 
       <article class="fix" data-company="openai" data-company-label="OpenAI" data-avatar="openai" data-featured="true">
@@ -617,7 +650,11 @@
     var workCards = Array.from(document.querySelectorAll('#merged-fixes .fix'));
     var allCards = Array.from(document.querySelectorAll('.fix'));
     var companyHost = document.getElementById('company-filters');
+    var companyMenu = document.getElementById('company-menu');
+    var menuToggle = document.getElementById('company-menu-toggle');
+    var menuLabel = document.getElementById('company-menu-label');
     var summary = document.getElementById('filter-summary');
+    var emptyState = document.getElementById('filter-empty');
     var observer;
 
     if (!reduce && 'IntersectionObserver' in window) {
@@ -664,64 +701,100 @@
         button.setAttribute('aria-controls', 'merged-fixes');
         button.setAttribute('aria-label', 'Show merged fixes for ' + company.label);
 
+        var avatarWrap = document.createElement('span');
+        avatarWrap.className = 'avatar';
+        avatarWrap.setAttribute('aria-hidden', 'true');
+        avatarWrap.textContent = company.label.slice(0, 1).toUpperCase();
         var avatar = document.createElement('img');
         avatar.src = 'https://github.com/' + company.avatar + '.png?size=40';
         avatar.alt = '';
-        avatar.loading = 'lazy';
         avatar.width = 22;
         avatar.height = 22;
-        avatar.addEventListener('error', function () { avatar.hidden = true; });
+        avatar.addEventListener('error', function () { avatar.remove(); });
+        avatarWrap.appendChild(avatar);
 
         var label = document.createElement('span');
+        label.className = 'name';
         label.textContent = company.label;
         var count = document.createElement('span');
         count.className = 'count';
         count.textContent = company.count;
 
-        button.append(avatar, label, count);
+        button.append(avatarWrap, label, count);
         companyHost.appendChild(button);
       });
 
     function applyFilter(filter, updateUrl) {
       var visible = workCards.filter(function (card) {
         if (filter === 'all') return true;
-        if (filter === 'featured') return card.dataset.featured === 'true';
+        if (!filter) return false;
         return card.dataset.company === filter;
       });
 
       workCards.forEach(function (card) { card.hidden = visible.indexOf(card) === -1; });
       visible.forEach(reveal);
+      emptyState.hidden = filter !== null;
 
       document.querySelectorAll('.filter-btn').forEach(function (button) {
         button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
       });
 
-      if (filter === 'featured') {
-        summary.textContent = 'Showing 8 featured fixes from 8 organizations. Choose a company or view all 27.';
+      if (!filter) {
+        menuLabel.textContent = 'Choose company';
+        summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
+        menuLabel.textContent = 'Choose company';
         summary.textContent = 'Showing all 27 merged fixes across 26 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
+        menuLabel.textContent = company.label + ' · ' + visible.length;
         summary.textContent = 'Showing ' + visible.length + ' merged ' + noun + ' for ' + company.label + '.';
       }
 
+      closeMenu();
       if (updateUrl) {
         var url = new URL(window.location.href);
-        if (filter === 'featured') url.searchParams.delete('company');
+        if (!filter) url.searchParams.delete('company');
         else url.searchParams.set('company', filter);
         history.pushState({ company: filter }, '', url);
+      }
+    }
+
+    function closeMenu() {
+      companyMenu.hidden = true;
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+
+    function toggleMenu() {
+      var opening = companyMenu.hidden;
+      companyMenu.hidden = !opening;
+      menuToggle.setAttribute('aria-expanded', String(opening));
+      if (opening) {
+        var active = companyHost.querySelector('[aria-pressed="true"]');
+        var first = active || companyHost.querySelector('.filter-btn');
+        if (first) first.focus();
       }
     }
 
     document.querySelectorAll('.filter-btn').forEach(function (button) {
       button.addEventListener('click', function () { applyFilter(button.dataset.filter, true); });
     });
+    menuToggle.addEventListener('click', toggleMenu);
+    document.addEventListener('click', function (event) {
+      if (!companyMenu.hidden && !event.target.closest('.filter-panel')) closeMenu();
+    });
+    document.addEventListener('keydown', function (event) {
+      if (event.key === 'Escape' && !companyMenu.hidden) {
+        closeMenu();
+        menuToggle.focus();
+      }
+    });
 
     function filterFromUrl() {
       var requested = new URLSearchParams(window.location.search).get('company');
       if (requested === 'all' || companies.has(requested)) return requested;
-      return 'featured';
+      return null;
     }
 
     window.addEventListener('popstate', function () { applyFilter(filterFromUrl(), false); });
