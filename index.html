@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 16 merged pull requests across OpenAI, Meta, Microsoft, Google, jq, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 27 merged pull requests across OpenAI, Meta, Microsoft, Google, Apple, Keras, Redis, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="16 merged pull requests across OpenAI, Meta, Microsoft, Google, jq, and more - plus 60+ in review.">
+<meta property="og:description" content="27 merged pull requests across OpenAI, Meta, Microsoft, Google, Apple, Keras, Redis, and more - plus 65 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -243,9 +243,9 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">16</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">60<span class="u">+</span></div><div class="k">in review</div></div>
-      <div class="stat"><div class="n">40<span class="u">+</span></div><div class="k">organizations</div></div>
+      <div class="stat"><div class="n">27</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">65</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">75</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
   </section>
@@ -385,34 +385,123 @@
         </div>
       </article>
 
+      <article class="fix">
+        <div class="top"><span class="org">Apple</span><a class="repo" href="https://github.com/apple/coremltools/pull/2760">apple/coremltools#2760</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Constant folding an exclusive cumulative sum could crash during Core ML graph optimization</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Handle the exclusive case correctly during folding</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Keras</span><a class="repo" href="https://github.com/keras-team/keras/pull/23265">keras-team/keras#23265</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>ops.select</code> inferred the wrong output shape or dtype when its inputs required broadcasting</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Apply broadcasting rules consistently during symbolic inference</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Redis</span><a class="repo" href="https://github.com/redis/node-redis/pull/3344">redis/node-redis#3344</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>hScanValuesIterator</code> yielded hash field names instead of their values</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Yield the value component promised by the iterator API</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Qdrant</span><a class="repo" href="https://github.com/qdrant/qdrant-client/pull/1259">qdrant/qdrant-client#1259</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Local-mode filters treated booleans and integers as interchangeable values</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Respect value types when matching local payload filters</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Scrapy</span><a class="repo" href="https://github.com/scrapy/scrapy/pull/7728">scrapy/scrapy#7728</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Repeated curl <code>-d</code> / <code>--data</code> options were not combined when creating a request</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Merge every supplied data segment like curl does</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">marimo</span><a class="repo" href="https://github.com/marimo-team/marimo/pull/10211">marimo-team/marimo#10211</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Editing <code>int8</code>, <code>uint8</code>, or <code>float16</code> columns could corrupt their numeric dtype</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Preserve narrow numeric dtypes through data-editor updates</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">SQLGlot</span><a class="repo" href="https://github.com/tobymao/sqlglot/pull/7895">tobymao/sqlglot#7895</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>TIMESTAMP_DIFF</code> and <code>DATETIME_DIFF</code> produced incorrect Presto / Trino SQL</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Translate argument order and units to the target dialect correctly</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Haystack</span><a class="repo" href="https://github.com/deepset-ai/haystack/pull/12062">deepset-ai/haystack#12062</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>Ellipsis</code> was lost when round-tripping variadic tuple and callable type annotations</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Preserve the marker through type serialization and deserialization</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Z.ai · GLM-V</span><a class="repo" href="https://github.com/zai-org/GLM-V/pull/266">zai-org/GLM-V#266</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>ensure_list</code> split valid string and byte values into individual elements</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Treat strings and bytes as scalar values when normalizing to a list</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">txtai</span><a class="repo" href="https://github.com/neuml/txtai/pull/1154">neuml/txtai#1154</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>IVFSparse</code> returned sparse nearest-neighbor results out of score order</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Sort sparse ANN results before returning them</span></div>
+        </div>
+      </article>
+
+      <article class="fix">
+        <div class="top"><span class="org">Twenty</span><a class="repo" href="https://github.com/twentyhq/twenty/pull/23010">twentyhq/twenty#23010</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Multi-select “contains any” filters required every selected value instead of any one match</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Use OR semantics for the “contains any” matcher</span></div>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <section class="review" aria-labelledby="review-h">
     <div class="sec-head">
       <h2 id="review-h">// currently in review</h2>
-      <span class="aside">60+ open</span>
+      <span class="aside">65 open</span>
     </div>
     <div class="orgcloud">
+      <span class="chip">Meta</span>
+      <span class="chip">Anthropic</span>
+      <span class="chip">Atlassian</span>
+      <span class="chip">Cloudflare</span>
+      <span class="chip">OpenAI</span>
+      <span class="chip">Google DeepMind</span>
+      <span class="chip">Google Cloud</span>
+      <span class="chip">Firebase</span>
+      <span class="chip">pytest</span>
       <span class="chip">NVIDIA</span>
       <span class="chip">Apple</span>
-      <span class="chip">Anthropic</span>
-      <span class="chip">Google DeepMind</span>
       <span class="chip">Hugging Face</span>
-      <span class="chip">Redis</span>
       <span class="chip">Qdrant</span>
       <span class="chip">Spotify</span>
-      <span class="chip">Supabase</span>
       <span class="chip">scikit-learn</span>
       <span class="chip">vLLM</span>
-      <span class="chip">IBM</span>
       <span class="chip">MLflow</span>
       <span class="chip">Microsoft</span>
       <span class="chip">OpenSearch</span>
-      <span class="chip">Scrapy</span>
-      <span class="chip">Keras</span>
-      <span class="chip">Ollama</span>
-      <span class="chip">Dask</span>
+      <span class="chip">Supabase</span>
       <a class="chip more" href="https://github.com/search?q=author%3Awinklemad+is%3Apr&type=pullrequests">see all →</a>
     </div>
   </section>
@@ -439,7 +528,7 @@
 
   <section class="stack" aria-labelledby="stack-h">
     <div class="sec-head"><h2 id="stack-h">// how i work</h2></div>
-    <div class="stackrow"><div class="k">Languages</div><div class="v">Python · TypeScript / JavaScript · Rust · Go · Java</div></div>
+    <div class="stackrow"><div class="k">Languages</div><div class="v">Python · TypeScript / JavaScript · Rust · Go · Java · C</div></div>
     <div class="stackrow"><div class="k">Domains</div><div class="v">AI / ML infrastructure · LLM &amp; agent tooling · databases · backend APIs · data engineering · systems · application security</div></div>
     <div class="stackrow"><div class="k">Method</div><div class="v"><b>Read the source → reproduce red → fix the whole bug class → prove it with a test → ship.</b></div></div>
   </section>
