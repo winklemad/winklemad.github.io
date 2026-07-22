@@ -128,6 +128,40 @@
 
   section.work { padding: 30px 0 10px; }
 
+  /* ─────────────── MERGED-WORK FILTERS ─────────────── */
+  .filter-panel {
+    margin: -4px 0 18px; padding: 14px; border: 1px solid var(--line);
+    border-radius: 10px; background: var(--surface); box-shadow: var(--shadow);
+  }
+  .filter-primary { display: flex; gap: 8px; margin-bottom: 13px; }
+  .filter-label {
+    margin: 0 0 8px; color: var(--faint); font-family: var(--mono);
+    font-size: 10.5px; letter-spacing: .1em; text-transform: uppercase;
+  }
+  .company-filters {
+    display: flex; gap: 8px; overflow-x: auto; padding: 1px 1px 7px;
+    scrollbar-width: thin; scrollbar-color: var(--line-strong) transparent;
+    scroll-snap-type: x proximity; -webkit-overflow-scrolling: touch;
+  }
+  .company-filters::-webkit-scrollbar { height: 5px; }
+  .company-filters::-webkit-scrollbar-thumb { background: var(--line-strong); border-radius: 999px; }
+  .filter-btn {
+    min-height: 36px; display: inline-flex; align-items: center; gap: 8px; flex: none;
+    border: 1px solid var(--line-strong); border-radius: 999px; padding: 6px 11px;
+    color: var(--muted); background: var(--bg); font: 600 12px/1 var(--mono);
+    cursor: pointer; scroll-snap-align: start; transition: color .15s, border-color .15s, background .15s, transform .15s;
+  }
+  .filter-btn:hover { color: var(--ink); border-color: var(--merge); transform: translateY(-1px); }
+  .filter-btn[aria-pressed="true"] { color: var(--merge); border-color: var(--merge); background: var(--merge-bg); }
+  .filter-btn:focus-visible { outline: 2px solid var(--merge); outline-offset: 2px; }
+  .filter-btn img { width: 22px; height: 22px; border-radius: 6px; object-fit: cover; background: var(--surface); }
+  .filter-btn .symbol { width: 22px; text-align: center; color: var(--merge); font-size: 15px; }
+  .filter-btn .count {
+    min-width: 18px; padding: 2px 5px; border-radius: 999px; text-align: center;
+    color: var(--faint); background: color-mix(in srgb, var(--ink) 7%, transparent); font-size: 10px;
+  }
+  .filter-summary { min-height: 20px; margin: 0 2px 16px; color: var(--muted); font: 12px/1.5 var(--mono); }
+
   /* ─────────────── CONTRIBUTION CARDS ─────────────── */
   .fixes { display: flex; flex-direction: column; gap: 14px; }
   .fix {
@@ -136,6 +170,7 @@
     opacity: 0; transform: translateY(10px);
   }
   .fix.in { opacity: 1; transform: none; transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.3,1); }
+  .fix[hidden] { display: none; }
   .fix .top { display: flex; align-items: center; gap: 12px; padding: 13px 16px; border-bottom: 1px solid var(--line); flex-wrap: wrap; }
   .fix .org { font-weight: 700; font-size: 14.5px; color: var(--ink); letter-spacing: -.01em; }
   .fix .repo { font-family: var(--mono); font-size: 12.5px; color: var(--muted); text-decoration: none; border-bottom: 1px dotted var(--line-strong); }
@@ -157,6 +192,11 @@
   .fix .dline.p .mark { color: var(--merge); }
   .fix .dline.p .t { color: var(--ink); }
   .fix .t code { font-family: var(--mono); background: color-mix(in srgb, var(--ink) 8%, transparent); padding: .5px 4px; border-radius: 4px; font-size: .94em; }
+  @media (max-width: 560px) {
+    .filter-panel { margin-inline: -4px; padding: 12px; }
+    .filter-primary { display: grid; grid-template-columns: 1fr 1fr; }
+    .filter-primary .filter-btn { justify-content: center; }
+  }
 
   /* ─────────────── IN REVIEW ─────────────── */
   section.review { padding: 44px 0; }
@@ -253,11 +293,24 @@
   <section class="work" aria-labelledby="merged-h">
     <div class="sec-head">
       <h2 id="merged-h">// merged fixes</h2>
-      <span class="aside">org · pr · what changed</span>
+      <span class="aside">filter by organization</span>
     </div>
-    <div class="fixes">
+    <div class="filter-panel">
+      <div class="filter-primary" role="group" aria-label="Contribution views">
+        <button class="filter-btn" type="button" data-filter="featured" aria-pressed="true" aria-controls="merged-fixes">
+          <span class="symbol" aria-hidden="true">✦</span><span>Featured</span><span class="count">8</span>
+        </button>
+        <button class="filter-btn" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
+          <span class="symbol" aria-hidden="true">↳</span><span>All fixes</span><span class="count">27</span>
+        </button>
+      </div>
+      <div class="filter-label">Choose a company — swipe or scroll</div>
+      <div class="company-filters" id="company-filters" role="group" aria-label="Filter merged fixes by company"></div>
+    </div>
+    <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
+    <div class="fixes" id="merged-fixes">
 
-      <article class="fix">
+      <article class="fix" data-company="openai" data-company-label="OpenAI" data-avatar="openai" data-featured="true">
         <div class="top"><span class="org">OpenAI</span><a class="repo" href="https://github.com/openai/openai-agents-python/pull/3763">openai-agents-python#3763</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Chat Completions dropped <code>logprobs=True</code> when <code>top_logprobs</code> was set → API returned a 400</span></div>
@@ -265,7 +318,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="openai" data-company-label="OpenAI" data-avatar="openai">
         <div class="top"><span class="org">OpenAI</span><a class="repo" href="https://github.com/openai/openai-agents-js/pull/1451">openai-agents-js#1451</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Deserializing a <code>RunState</code> lost token usage → resumed runs silently under-reported usage (billing)</span></div>
@@ -273,7 +326,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="meta" data-company-label="Meta" data-avatar="facebook" data-featured="true">
         <div class="top"><span class="org">Meta</span><a class="repo" href="https://github.com/facebookresearch/xformers/pull/1402">facebookresearch/xformers#1402</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">The attention profiler over-counted <code>softmax@V</code> FLOPs for non-square causal masks</span></div>
@@ -281,7 +334,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="microsoft" data-company-label="Microsoft" data-avatar="microsoft" data-featured="true">
         <div class="top"><span class="org">Microsoft</span><a class="repo" href="https://github.com/deepspeedai/DeepSpeed/pull/8145">deepspeedai/DeepSpeed#8145</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>DeepSpeedInferenceConfig</code> crashed on a legacy boolean MoE value its own back-compat path was meant to accept</span></div>
@@ -289,7 +342,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="google" data-company-label="Google" data-avatar="google" data-featured="true">
         <div class="top"><span class="org">Google</span><a class="repo" href="https://github.com/google-research/timesfm/pull/463">google-research/timesfm#463</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Quantile-flip invariance skipped the autoregressive branch → corrupted forecast bands past horizon 128</span></div>
@@ -297,7 +350,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="carapaceproxy" data-company-label="carapaceproxy" data-avatar="diennea">
         <div class="top"><span class="org">carapaceproxy</span><a class="repo" href="https://github.com/diennea/carapaceproxy/pull/614">diennea/carapaceproxy#614</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Absolute-form request URIs bypassed a path-anchored ACL deny rule — an auth bypass (CWE-436 / CWE-863)</span></div>
@@ -305,7 +358,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="pydantic" data-company-label="pydantic" data-avatar="pydantic">
         <div class="top"><span class="org">pydantic</span><a class="repo" href="https://github.com/pydantic/pydantic/pull/13428">pydantic/pydantic#13428</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>__hash__</code> on <code>WithJsonSchema</code> / <code>Examples</code> ignored the <code>mode</code> value → distinct schemas collided</span></div>
@@ -313,7 +366,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="unsloth" data-company-label="Unsloth" data-avatar="unslothai">
         <div class="top"><span class="org">Unsloth</span><a class="repo" href="https://github.com/unslothai/unsloth/pull/7073">unslothai/unsloth#7073</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>SyntheticDataKit.chunk_data</code> emitted chunks over the requested <code>max_tokens</code></span></div>
@@ -321,7 +374,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="mistral" data-company-label="Mistral" data-avatar="mistralai" data-featured="true">
         <div class="top"><span class="org">Mistral</span><a class="repo" href="https://github.com/mistralai/mistral-common/pull/262">mistralai/mistral-common#262</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">The <code>seed</code> field was dropped when bridging a <code>SpeechRequest</code> into the OpenAI format</span></div>
@@ -329,7 +382,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="vue" data-company-label="Vue" data-avatar="vuejs">
         <div class="top"><span class="org">Vue</span><a class="repo" href="https://github.com/vuejs/pinia/pull/3162">vuejs/pinia#3162</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Hydrating a store merged incoming reactive <code>Set</code> / <code>Map</code> state into the existing value instead of replacing it → stale entries survived</span></div>
@@ -337,7 +390,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="prefect" data-company-label="Prefect" data-avatar="PrefectHQ">
         <div class="top"><span class="org">Prefect</span><a class="repo" href="https://github.com/PrefectHQ/fastmcp/pull/4492">PrefectHQ/fastmcp#4492</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>compress_schema</code> mutated the caller's schema object in place → side effects on the passed-in data</span></div>
@@ -345,7 +398,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="uutils" data-company-label="uutils" data-avatar="uutils">
         <div class="top"><span class="org">uutils · Rust</span><a class="repo" href="https://github.com/uutils/coreutils/pull/13439">uutils/coreutils#13439</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>paste -s -d</code> didn't restart the delimiter cycle per file → output diverged from GNU coreutils</span></div>
@@ -353,7 +406,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="htop" data-company-label="htop" data-avatar="htop-dev">
         <div class="top"><span class="org">htop · C</span><a class="repo" href="https://github.com/htop-dev/htop/pull/2046">htop-dev/htop#2046</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">A reset-on-fork scheduling flag was <code>&amp;=</code>-ed instead of <code>|=</code>-ed → the policy was zeroed on every set</span></div>
@@ -361,7 +414,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="psycopg" data-company-label="psycopg" data-avatar="psycopg">
         <div class="top"><span class="org">psycopg · Python</span><a class="repo" href="https://github.com/psycopg/psycopg/pull/1373">psycopg/psycopg#1373</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Two <code>DataError</code> messages were missing the <code>f</code> prefix → <code>{...}</code> placeholders printed as literal braces</span></div>
@@ -369,7 +422,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="novu" data-company-label="Novu" data-avatar="novuhq">
         <div class="top"><span class="org">Novu</span><a class="repo" href="https://github.com/novuhq/novu/pull/11984">novuhq/novu#11984</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">The digest name filter rendered "and 0 others" when <code>maxNames</code> already covered every item</span></div>
@@ -377,7 +430,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="jq" data-company-label="jq" data-avatar="jqlang">
         <div class="top"><span class="org">jq · C</span><a class="repo" href="https://github.com/jqlang/jq/pull/3586">jqlang/jq#3586</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">A zero-width global regex match advanced one code unit, not the whole Unicode codepoint — <code>["🚀" | match(""; "g")] | length</code> miscounted multi-byte chars</span></div>
@@ -385,7 +438,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="apple" data-company-label="Apple" data-avatar="apple" data-featured="true">
         <div class="top"><span class="org">Apple</span><a class="repo" href="https://github.com/apple/coremltools/pull/2760">apple/coremltools#2760</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Constant folding an exclusive cumulative sum could crash during Core ML graph optimization</span></div>
@@ -393,7 +446,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="keras" data-company-label="Keras" data-avatar="keras-team" data-featured="true">
         <div class="top"><span class="org">Keras</span><a class="repo" href="https://github.com/keras-team/keras/pull/23265">keras-team/keras#23265</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>ops.select</code> inferred the wrong output shape or dtype when its inputs required broadcasting</span></div>
@@ -401,7 +454,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="redis" data-company-label="Redis" data-avatar="redis" data-featured="true">
         <div class="top"><span class="org">Redis</span><a class="repo" href="https://github.com/redis/node-redis/pull/3344">redis/node-redis#3344</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>hScanValuesIterator</code> yielded hash field names instead of their values</span></div>
@@ -409,7 +462,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="qdrant" data-company-label="Qdrant" data-avatar="qdrant">
         <div class="top"><span class="org">Qdrant</span><a class="repo" href="https://github.com/qdrant/qdrant-client/pull/1259">qdrant/qdrant-client#1259</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Local-mode filters treated booleans and integers as interchangeable values</span></div>
@@ -417,7 +470,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="scrapy" data-company-label="Scrapy" data-avatar="scrapy">
         <div class="top"><span class="org">Scrapy</span><a class="repo" href="https://github.com/scrapy/scrapy/pull/7728">scrapy/scrapy#7728</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Repeated curl <code>-d</code> / <code>--data</code> options were not combined when creating a request</span></div>
@@ -425,7 +478,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="marimo" data-company-label="marimo" data-avatar="marimo-team">
         <div class="top"><span class="org">marimo</span><a class="repo" href="https://github.com/marimo-team/marimo/pull/10211">marimo-team/marimo#10211</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Editing <code>int8</code>, <code>uint8</code>, or <code>float16</code> columns could corrupt their numeric dtype</span></div>
@@ -433,7 +486,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="sqlglot" data-company-label="SQLGlot" data-avatar="tobymao">
         <div class="top"><span class="org">SQLGlot</span><a class="repo" href="https://github.com/tobymao/sqlglot/pull/7895">tobymao/sqlglot#7895</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>TIMESTAMP_DIFF</code> and <code>DATETIME_DIFF</code> produced incorrect Presto / Trino SQL</span></div>
@@ -441,7 +494,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="haystack" data-company-label="Haystack" data-avatar="deepset-ai">
         <div class="top"><span class="org">Haystack</span><a class="repo" href="https://github.com/deepset-ai/haystack/pull/12062">deepset-ai/haystack#12062</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>Ellipsis</code> was lost when round-tripping variadic tuple and callable type annotations</span></div>
@@ -449,7 +502,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="zai" data-company-label="Z.ai · GLM-V" data-avatar="zai-org">
         <div class="top"><span class="org">Z.ai · GLM-V</span><a class="repo" href="https://github.com/zai-org/GLM-V/pull/266">zai-org/GLM-V#266</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>ensure_list</code> split valid string and byte values into individual elements</span></div>
@@ -457,7 +510,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="txtai" data-company-label="txtai" data-avatar="neuml">
         <div class="top"><span class="org">txtai</span><a class="repo" href="https://github.com/neuml/txtai/pull/1154">neuml/txtai#1154</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>IVFSparse</code> returned sparse nearest-neighbor results out of score order</span></div>
@@ -465,7 +518,7 @@
         </div>
       </article>
 
-      <article class="fix">
+      <article class="fix" data-company="twenty" data-company-label="Twenty" data-avatar="twentyhq">
         <div class="top"><span class="org">Twenty</span><a class="repo" href="https://github.com/twentyhq/twenty/pull/23010">twentyhq/twenty#23010</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t">Multi-select “contains any” filters required every selected value instead of any one match</span></div>
@@ -561,22 +614,119 @@
 <script>
   (function () {
     var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    var cards = document.querySelectorAll('.fix');
-    if (reduce || !('IntersectionObserver' in window)) {
-      cards.forEach(function (c) { c.classList.add('in'); });
-      return;
+    var workCards = Array.from(document.querySelectorAll('#merged-fixes .fix'));
+    var allCards = Array.from(document.querySelectorAll('.fix'));
+    var companyHost = document.getElementById('company-filters');
+    var summary = document.getElementById('filter-summary');
+    var observer;
+
+    if (!reduce && 'IntersectionObserver' in window) {
+      observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var card = entry.target;
+          var index = Number(card.dataset.i) || 0;
+          setTimeout(function () { card.classList.add('in'); }, Math.min(index, 6) * 55);
+          observer.unobserve(card);
+        });
+      }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
     }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          var el = e.target;
-          var i = +el.dataset.i || 0;
-          setTimeout(function () { el.classList.add('in'); }, Math.min(i, 6) * 55);
-          io.unobserve(el);
-        }
+
+    function reveal(card, index) {
+      if (card.classList.contains('in')) return;
+      card.dataset.i = index;
+      if (observer) observer.observe(card);
+      else card.classList.add('in');
+    }
+
+    var companies = new Map();
+    workCards.forEach(function (card) {
+      var slug = card.dataset.company;
+      if (!companies.has(slug)) {
+        companies.set(slug, {
+          slug: slug,
+          label: card.dataset.companyLabel,
+          avatar: card.dataset.avatar,
+          count: 0
+        });
+      }
+      companies.get(slug).count += 1;
+    });
+
+    Array.from(companies.values())
+      .sort(function (a, b) { return a.label.localeCompare(b.label); })
+      .forEach(function (company) {
+        var button = document.createElement('button');
+        button.className = 'filter-btn';
+        button.type = 'button';
+        button.dataset.filter = company.slug;
+        button.setAttribute('aria-pressed', 'false');
+        button.setAttribute('aria-controls', 'merged-fixes');
+        button.setAttribute('aria-label', 'Show merged fixes for ' + company.label);
+
+        var avatar = document.createElement('img');
+        avatar.src = 'https://github.com/' + company.avatar + '.png?size=40';
+        avatar.alt = '';
+        avatar.loading = 'lazy';
+        avatar.width = 22;
+        avatar.height = 22;
+        avatar.addEventListener('error', function () { avatar.hidden = true; });
+
+        var label = document.createElement('span');
+        label.textContent = company.label;
+        var count = document.createElement('span');
+        count.className = 'count';
+        count.textContent = company.count;
+
+        button.append(avatar, label, count);
+        companyHost.appendChild(button);
       });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-    cards.forEach(function (c, i) { c.dataset.i = i; io.observe(c); });
+
+    function applyFilter(filter, updateUrl) {
+      var visible = workCards.filter(function (card) {
+        if (filter === 'all') return true;
+        if (filter === 'featured') return card.dataset.featured === 'true';
+        return card.dataset.company === filter;
+      });
+
+      workCards.forEach(function (card) { card.hidden = visible.indexOf(card) === -1; });
+      visible.forEach(reveal);
+
+      document.querySelectorAll('.filter-btn').forEach(function (button) {
+        button.setAttribute('aria-pressed', String(button.dataset.filter === filter));
+      });
+
+      if (filter === 'featured') {
+        summary.textContent = 'Showing 8 featured fixes from 8 organizations. Choose a company or view all 27.';
+      } else if (filter === 'all') {
+        summary.textContent = 'Showing all 27 merged fixes across 26 organizations.';
+      } else {
+        var company = companies.get(filter);
+        var noun = visible.length === 1 ? 'fix' : 'fixes';
+        summary.textContent = 'Showing ' + visible.length + ' merged ' + noun + ' for ' + company.label + '.';
+      }
+
+      if (updateUrl) {
+        var url = new URL(window.location.href);
+        if (filter === 'featured') url.searchParams.delete('company');
+        else url.searchParams.set('company', filter);
+        history.pushState({ company: filter }, '', url);
+      }
+    }
+
+    document.querySelectorAll('.filter-btn').forEach(function (button) {
+      button.addEventListener('click', function () { applyFilter(button.dataset.filter, true); });
+    });
+
+    function filterFromUrl() {
+      var requested = new URLSearchParams(window.location.search).get('company');
+      if (requested === 'all' || companies.has(requested)) return requested;
+      return 'featured';
+    }
+
+    window.addEventListener('popstate', function () { applyFilter(filterFromUrl(), false); });
+    applyFilter(filterFromUrl(), false);
+    allCards.filter(function (card) { return workCards.indexOf(card) === -1; }).forEach(reveal);
   })();
 </script>
 </body>
