@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 27 merged pull requests across OpenAI, Meta, Microsoft, Google, Apple, Keras, Redis, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 28 merged pull requests across OpenAI, Meta, Microsoft, Google, Google DeepMind, Apple, Keras, Redis, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="27 merged pull requests across OpenAI, Meta, Microsoft, Google, Apple, Keras, Redis, and more - plus 65 in review.">
+<meta property="og:description" content="28 merged pull requests across OpenAI, Meta, Microsoft, Google, Google DeepMind, Apple, Keras, Redis, and more - plus 60+ in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,8 +313,8 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">27</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">65</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">28</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">64</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">75</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
@@ -331,7 +331,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 27 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 28 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -484,6 +484,14 @@
         <div class="body">
           <div class="dline m"><span class="mark">-</span><span class="t"><code>ops.select</code> inferred the wrong output shape or dtype when its inputs required broadcasting</span></div>
           <div class="dline p"><span class="mark">+</span><span class="t">Apply broadcasting rules consistently during symbolic inference</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="google-deepmind" data-company-label="Google DeepMind" data-avatar="google-deepmind" data-featured="true">
+        <div class="top"><span class="org">Google DeepMind</span><a class="repo" href="https://github.com/google-deepmind/mujoco/pull/3418">google-deepmind/mujoco#3418</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>least_squares</code> stopped on the <code>xtol</code> step tolerance before committing the accepted step, returning the previous, higher-objective iterate</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Accept the Armijo-approved candidate before terminating on <code>xtol</code></span></div>
         </div>
       </article>
 
@@ -744,7 +752,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 27 merged fixes across 26 organizations.';
+        summary.textContent = 'Showing all 28 merged fixes across 27 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
