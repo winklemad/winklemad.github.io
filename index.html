@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 28 merged pull requests across OpenAI, Meta, Microsoft, Google, Google DeepMind, Apple, Keras, Redis, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 36 merged pull requests across OpenAI, Meta, Microsoft, Google, Google DeepMind, Apple, Keras, Redis, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="28 merged pull requests across OpenAI, Meta, Microsoft, Google, Google DeepMind, Apple, Keras, Redis, and more - plus 60+ in review.">
+<meta property="og:description" content="36 merged pull requests across OpenAI, Meta, Google, MongoDB, Microsoft, Google DeepMind, Apple, Keras, Redis, and more - plus 60+ in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,7 +313,7 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">28</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">36</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">64</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">75</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
@@ -331,7 +331,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 28 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 36 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -566,6 +566,62 @@
           <div class="dline p"><span class="mark">+</span><span class="t">Use OR semantics for the “contains any” matcher</span></div>
         </div>
       </article>
+      <article class="fix" data-company="google" data-company-label="Google" data-avatar="google">
+        <div class="top"><span class="org">Google</span><a class="repo" href="https://github.com/google/adk-go/pull/1139">google/adk-go#1139</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>SearchMemory</code> scanned the session store without holding the read lock &rarr; data race</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Hold the read lock for the whole scan</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="mongodb" data-company-label="MongoDB" data-avatar="mongodb">
+        <div class="top"><span class="org">MongoDB</span><a class="repo" href="https://github.com/mongodb/mongo-python-driver/pull/2961">mongodb/mongo-python-driver#2961</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Extended JSON <code>$timestamp</code> accepted extra keys and non-document values &rarr; malformed input parsed silently</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Reject anything but a single well-formed <code>$timestamp</code> document</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="meta" data-company-label="Meta" data-avatar="facebook">
+        <div class="top"><span class="org">Meta</span><a class="repo" href="https://github.com/facebook/lexical/pull/8873">facebook/lexical#8873</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Unrestricted CSS selector groups were never dispatched during HTML conversion</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Dispatch every selector in the group</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="pytest" data-company-label="pytest" data-avatar="pytest-dev">
+        <div class="top"><span class="org">pytest</span><a class="repo" href="https://github.com/pytest-dev/pytest/pull/14754">pytest-dev/pytest#14754</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>approx()</code> with an infinite relative tolerance broke on <code>timedelta</code> values</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Handle infinite relative tolerance for timedeltas</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="dify" data-company-label="Dify" data-avatar="langgenius">
+        <div class="top"><span class="org">Dify</span><a class="repo" href="https://github.com/langgenius/dify/pull/39215">langgenius/dify#39215</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The RAG document cleaner stripped valid characters out of indexed text</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Strip only the intended control characters</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="graphiti" data-company-label="Graphiti" data-avatar="getzep">
+        <div class="top"><span class="org">Graphiti</span><a class="repo" href="https://github.com/getzep/graphiti/pull/1637">getzep/graphiti#1637</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The MCP server built its cross-encoder outside the provider configuration</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Configure the cross-encoder from providers</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="qdrant" data-company-label="Qdrant" data-avatar="qdrant">
+        <div class="top"><span class="org">Qdrant</span><a class="repo" href="https://github.com/qdrant/qdrant-client/pull/1260">qdrant/qdrant-client#1260</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Falsy values lost proto3 field presence across REST/gRPC &rarr; explicitly-set fields dropped</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Preserve field presence for falsy values</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="colibri" data-company-label="Colibri" data-avatar="JustVugg">
+        <div class="top"><span class="org">Colibri</span><a class="repo" href="https://github.com/JustVugg/colibri/pull/568">JustVugg/colibri#568</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Anthropic thinking output was emitted as one merged response block</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Split thinking blocks apart</span></div>
+        </div>
+      </article>
 
     </div>
   </section>
@@ -752,7 +808,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 28 merged fixes across 27 organizations.';
+        summary.textContent = 'Showing all 36 merged fixes across 34 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
