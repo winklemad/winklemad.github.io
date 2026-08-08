@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 36 merged pull requests across OpenAI, Meta, Microsoft, Google, Google DeepMind, Apple, Keras, Redis, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 39 merged bug fixes across OpenAI, Meta, Microsoft, Google, Google DeepMind, Apple, Docker, Keras, Redis, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="36 merged pull requests across OpenAI, Meta, Google, MongoDB, Microsoft, Google DeepMind, Apple, Keras, Redis, and more - plus 60+ in review.">
+<meta property="og:description" content="39 merged bug fixes across OpenAI, Meta, Google, MongoDB, Microsoft, Google DeepMind, Apple, Docker, Keras, Redis, and more - plus 55+ in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,8 +313,8 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">36</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">64</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">39</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">57</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">75</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
@@ -331,7 +331,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 36 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 39 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -622,6 +622,27 @@
           <div class="dline p"><span class="mark">+</span><span class="t">Split thinking blocks apart</span></div>
         </div>
       </article>
+      <article class="fix" data-company="docker" data-company-label="Docker" data-avatar="docker">
+        <div class="top"><span class="org">Docker</span><a class="repo" href="https://github.com/docker/cli/pull/7145">docker/cli#7145</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>docker service update</code> panicked when a value was passed twice — <code>makeEnv</code>/<code>updateHosts</code> deleted from a slice while ranging over it</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Fix the in-place deletion so duplicate env vars and hosts no longer crash the update</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="apple" data-company-label="Apple" data-avatar="apple">
+        <div class="top"><span class="org">Apple</span><a class="repo" href="https://github.com/apple/coremltools/pull/2762">apple/coremltools#2762</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>noop_elimination</code> stripped <code>floor_div(x, 1)</code> even for floats, silently dropping the flooring</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Keep <code>floor_div(x, 1)</code> for float inputs so the truncation semantics are preserved</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="colibri" data-company-label="Colibri" data-avatar="JustVugg">
+        <div class="top"><span class="org">Colibri</span><a class="repo" href="https://github.com/JustVugg/colibri/pull/567">JustVugg/colibri#567</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">At the NGEN limit the final token was emitted but never written to the stateful KV cache, so <code>:more</code> resumed a token early and dropped the answer's tail</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Forward the capped token into the KV cache before advancing so stateful resumes stay in sync</span></div>
+        </div>
+      </article>
 
     </div>
   </section>
@@ -629,7 +650,7 @@
   <section class="review" aria-labelledby="review-h">
     <div class="sec-head">
       <h2 id="review-h">// currently in review</h2>
-      <span class="aside">65 open</span>
+      <span class="aside">57 open</span>
     </div>
     <div class="orgcloud">
       <span class="chip">Meta</span>
@@ -808,7 +829,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 36 merged fixes across 34 organizations.';
+        summary.textContent = 'Showing all 39 merged fixes across 35 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
