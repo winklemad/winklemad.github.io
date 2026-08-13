@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 39 merged bug fixes across OpenAI, Meta, Microsoft, Google, Google DeepMind, Apple, Docker, Keras, Redis, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 44 merged pull requests across OpenAI, Meta, Prometheus, Google, Google DeepMind, Apple, Docker, OpenTelemetry, Hugging Face, Keras, Redis, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="39 merged bug fixes across OpenAI, Meta, Google, MongoDB, Microsoft, Google DeepMind, Apple, Docker, Keras, Redis, and more - plus 55+ in review.">
+<meta property="og:description" content="44 merged pull requests across OpenAI, Meta, Google, Prometheus, MongoDB, Google DeepMind, Apple, Docker, OpenTelemetry, Keras, Redis, and more - plus 55 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,8 +313,8 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">39</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">57</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">44</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">55</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">75</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
@@ -331,7 +331,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 39 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 44 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -643,6 +643,41 @@
           <div class="dline p"><span class="mark">+</span><span class="t">Forward the capped token into the KV cache before advancing so stateful resumes stay in sync</span></div>
         </div>
       </article>
+      <article class="fix" data-company="prometheus" data-company-label="Prometheus" data-avatar="prometheus">
+        <div class="top"><span class="org">Prometheus</span><a class="repo" href="https://github.com/prometheus/prometheus/pull/19312">prometheus/prometheus#19312</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A second span merge inside <code>Compact</code> spliced its zero fill at a stale index, relocating real buckets and underflowing integer counts &#8212; a histogram that passed <code>Validate()</code> failed it straight after compaction</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Advance the bucket index past the span just absorbed, not only past the gap it filled</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="opentelemetry" data-company-label="OpenTelemetry" data-avatar="open-telemetry">
+        <div class="top"><span class="org">OpenTelemetry</span><a class="repo" href="https://github.com/open-telemetry/opentelemetry-python/pull/5430">opentelemetry-python#5430</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The SDK lower-cases instrument names but matched views against the raw pattern, so a <code>View</code> built with an instrument&#8217;s real mixed-case name never matched &#8212; and <code>fnmatch</code>&#8217;s <code>normcase</code> made it match on Windows but not Linux/macOS</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Match instrument names case-insensitively and identically on every platform, so the view&#8217;s aggregation actually applies</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
+        <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/peft/pull/3425">huggingface/peft#3425</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>if layers_pattern and not layers_to_transform</code> rejected the valid index <code>0</code> because zero is falsy, so the first layer could never be targeted &#8212; the same check was copy-pasted across 19 tuner configs</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Test for <code>None</code> explicitly, swept through every tuner config at once</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="mlx" data-company-label="MLX" data-avatar="ml-explore">
+        <div class="top"><span class="org">MLX</span><a class="repo" href="https://github.com/ml-explore/mlx/pull/3846">ml-explore/mlx#3846</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>log_cosh_loss</code>&#8217;s docstring documented a mean-reduced scalar, but the function defaults to <code>reduction=&quot;none&quot;</code> and returns a per-element loss</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Document the element-wise loss the default actually returns</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="redis" data-company-label="Redis" data-avatar="redis">
+        <div class="top"><span class="org">Redis</span><a class="repo" href="https://github.com/redis/redis-py/pull/4209">redis/redis-py#4209</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Both URL parsers documented that every querystring value is passed through <code>unquote</code>, but <code>parse_qs</code> already decodes them and no second pass happens &#8212; so the documented decoding behaviour was wrong</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Document the single decode that actually occurs, in the sync and async parsers</span></div>
+        </div>
+      </article>
 
     </div>
   </section>
@@ -650,7 +685,7 @@
   <section class="review" aria-labelledby="review-h">
     <div class="sec-head">
       <h2 id="review-h">// currently in review</h2>
-      <span class="aside">57 open</span>
+      <span class="aside">55 open</span>
     </div>
     <div class="orgcloud">
       <span class="chip">Meta</span>
@@ -829,7 +864,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 39 merged fixes across 35 organizations.';
+        summary.textContent = 'Showing all 44 merged pull requests across 39 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
