@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 44 merged pull requests across OpenAI, Meta, Prometheus, Google, Google DeepMind, Apple, Docker, OpenTelemetry, Hugging Face, Keras, Redis, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 47 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="44 merged pull requests across OpenAI, Meta, Google, Prometheus, MongoDB, Google DeepMind, Apple, Docker, OpenTelemetry, Keras, Redis, and more - plus 55 in review.">
+<meta property="og:description" content="47 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, and more - plus 55 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,7 +313,7 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">44</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">47</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">55</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">75</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
@@ -331,7 +331,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 44 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 47 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -678,6 +678,27 @@
           <div class="dline p"><span class="mark">+</span><span class="t">Document the single decode that actually occurs, in the sync and async parsers</span></div>
         </div>
       </article>
+      <article class="fix" data-company="anthropic" data-company-label="Anthropic" data-avatar="anthropics">
+        <div class="top"><span class="org">Anthropic</span><a class="repo" href="https://github.com/anthropics/claude-code-action/pull/1647">claude-code-action#1647</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Restoring trusted config ran an unconditional <code>--depth=1</code> fetch, turning a <code>fetch-depth: 0</code> checkout shallow: <code>git log base..HEAD</code> then listed already-merged commits and <code>git diff base...HEAD</code> died with &quot;no merge base&quot; &#8212; the two commands the action tells Claude to run</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Only limit the depth when the checkout is already shallow, keeping the speed-up where it was intended</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="nvidia" data-company-label="NVIDIA" data-avatar="NVIDIA">
+        <div class="top"><span class="org">NVIDIA</span><a class="repo" href="https://github.com/NVIDIA/Megatron-LM/pull/5726">Megatron-LM#5726</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Multimodal <code>add_document</code> derived its default modes from the wrong length, so documents were built against a mismatched count</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Use <code>len(lengths)</code> for the default modes</span></div>
+        </div>
+      </article>
+      <article class="fix" data-company="rust" data-company-label="Rust" data-avatar="rust-lang">
+        <div class="top"><span class="org">Rust</span><a class="repo" href="https://github.com/rust-lang/cargo/pull/17274">rust-lang/cargo#17274</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A closing frontmatter fence one <code>-</code> short consumed a byte past the dashes, panicking when the next byte began a multi-byte char, and under-reported the difference by counting the newline as a dash</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Derive the dash count from the slice length so the span ends on a char boundary</span></div>
+        </div>
+      </article>
 
     </div>
   </section>
@@ -864,7 +885,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 44 merged pull requests across 39 organizations.';
+        summary.textContent = 'Showing all 47 merged pull requests across 42 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
