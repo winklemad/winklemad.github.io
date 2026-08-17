@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 47 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 48 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="47 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, and more - plus 56 in review.">
+<meta property="og:description" content="48 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, and more - plus 58 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,9 +313,9 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">47</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">56</div><div class="k">in review</div></div>
-      <div class="stat"><div class="n">77</div><div class="k">external repo owners</div></div>
+      <div class="stat"><div class="n">48</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">58</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">80</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
   </section>
@@ -331,7 +331,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 47 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 48 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -699,6 +699,13 @@
           <div class="dline p"><span class="mark">+</span><span class="t">Derive the dash count from the slice length so the span ends on a char boundary</span></div>
         </div>
       </article>
+      <article class="fix" data-company="cloudflare" data-company-label="Cloudflare" data-avatar="cloudflare">
+        <div class="top"><span class="org">Cloudflare</span><a class="repo" href="https://github.com/cloudflare/chanfana/pull/346">cloudflare/chanfana#346</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Numeric request parameters were coerced loosely, so values that were not valid numbers passed validation and reached handlers</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Validate numeric parameters strictly so invalid input is rejected at the boundary</span></div>
+        </div>
+      </article>
 
     </div>
   </section>
@@ -706,7 +713,7 @@
   <section class="review" aria-labelledby="review-h">
     <div class="sec-head">
       <h2 id="review-h">// currently in review</h2>
-      <span class="aside">56 open</span>
+      <span class="aside">58 open</span>
     </div>
     <div class="orgcloud">
       <span class="chip">Meta</span>
@@ -885,7 +892,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 47 merged pull requests across 42 organizations.';
+        summary.textContent = 'Showing all 48 merged pull requests across 43 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
