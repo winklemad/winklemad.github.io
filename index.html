@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 48 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 54 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="48 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, and more - plus 58 in review.">
+<meta property="og:description" content="54 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, and more - plus 74 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,8 +313,8 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">48</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">58</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">54</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">74</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">80</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
@@ -331,7 +331,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 48 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 54 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -342,6 +342,54 @@
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
     <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
+
+      <article class="fix" data-company="marimo" data-company-label="marimo" data-avatar="marimo-team">
+        <div class="top"><span class="org">marimo</span><a class="repo" href="https://github.com/marimo-team/marimo/pull/10617">marimo-team/marimo#10617</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The dataframe transform code printer emitted <code>.str.contains(value)</code> for the literal <code>contains</code> filter, so copied code searched by <strong>regex</strong> — returning different rows than the widget and crashing on an unbalanced metacharacter</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Print a literal match so the generated code matches the handler's own <code>literal=True</code> filtering for pandas and Polars</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="mollie" data-company-label="Mollie" data-avatar="mollie">
+        <div class="top"><span class="org">Mollie</span><a class="repo" href="https://github.com/mollie/mollie-api-php/pull/907">mollie-api-php#907</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The request filter used PHP <code>empty()</code>, silently dropping fields whose value was <code>0</code>, <code>"0"</code> or <code>0.0</code></span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Strip only <code>null</code>, <code>""</code> and <code>[]</code> so a payment field of <code>"0"</code> survives the request</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="eleutherai" data-company-label="EleutherAI" data-avatar="eleutherai">
+        <div class="top"><span class="org">EleutherAI</span><a class="repo" href="https://github.com/EleutherAI/lm-evaluation-harness/pull/4003">lm-evaluation-harness#4003</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A scalar <code>seed:</code> in a YAML config crashed with <code>TypeError</code>, and <code>seed: 0</code> was silently ignored</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Normalize a scalar seed the way the CLI does, accepting lengths 1, 3 and 4</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="mckinsey" data-company-label="McKinsey" data-avatar="mckinsey">
+        <div class="top"><span class="org">McKinsey</span><a class="repo" href="https://github.com/mckinsey/vizro/pull/1837">vizro#1837</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A time filter raised on a time-of-day column that was not <code>datetime64</code></span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Dispatch on the value's type so real times are handled and other values fall through</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="mckinsey" data-company-label="McKinsey" data-avatar="mckinsey">
+        <div class="top"><span class="org">McKinsey</span><a class="repo" href="https://github.com/mckinsey/vizro/pull/1838">vizro#1838</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Slider step validation raised <code>TypeError</code> when <code>max</code> was set without <code>min</code></span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Require both bounds before comparing the step against the range</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="svelte" data-company-label="Svelte" data-avatar="svelte">
+        <div class="top"><span class="org">Svelte</span><a class="repo" href="https://github.com/sveltejs/svelte/pull/18645">svelte#18645</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The printer dropped the space before a <code>{#await ... catch}</code> binding, so output did not re-parse</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Print a space before the catch binding</span></div>
+        </div>
+      </article>
 
       <article class="fix" data-company="openai" data-company-label="OpenAI" data-avatar="openai" data-featured="true">
         <div class="top"><span class="org">OpenAI</span><a class="repo" href="https://github.com/openai/openai-agents-python/pull/3763">openai-agents-python#3763</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
@@ -713,7 +761,7 @@
   <section class="review" aria-labelledby="review-h">
     <div class="sec-head">
       <h2 id="review-h">// currently in review</h2>
-      <span class="aside">58 open</span>
+      <span class="aside">74 open</span>
     </div>
     <div class="orgcloud">
       <span class="chip">Meta</span>
@@ -892,7 +940,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 48 merged pull requests across 43 organizations.';
+        summary.textContent = 'Showing all 54 merged pull requests across 47 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
