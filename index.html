@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 54 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 59 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="54 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, and more - plus 74 in review.">
+<meta property="og:description" content="59 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 74 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,7 +313,7 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">54</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">59</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">74</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">80</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
@@ -330,7 +330,7 @@
       <p style="margin:0"><strong>AI inference &amp; serving</strong> — batching, serving, latency · <span style="opacity:.7">openai-agents-python/js, DeepSpeed inference config, xformers attention FLOPs, keras broadcasting; vLLM &amp; SGLang in review</span></p>
       <p style="margin:0"><strong>Observability</strong> — metrics, tracing, failure diagnosis · <span style="opacity:.7">prometheus histogram compaction, opentelemetry-python View matching</span></p>
       <p style="margin:0"><strong>Data infrastructure</strong> — vector DBs, storage, retrieval · <span style="opacity:.7">qdrant-client ×2, txtai ANN ordering, mongo-python-driver, haystack; LanceDB &amp; Chroma in review</span></p>
-      <p style="margin:0"><strong>ML systems</strong> — training, quantization, fine-tuning, export · <span style="opacity:.7">NVIDIA/Megatron-LM, huggingface/peft LoRA, coremltools ×2, timesfm; llm-compressor quantization + pruning in review</span></p>
+      <p style="margin:0"><strong>ML systems</strong> — training, quantization, fine-tuning, export · <span style="opacity:.7">NVIDIA/Megatron-LM, timm ×4 (optimizer + augmentation), huggingface/peft LoRA, coremltools ×2, timesfm; llm-compressor quantization + pruning in review</span></p>
     </div>
   </section>
 
@@ -356,6 +356,46 @@
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
     <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
+
+      <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
+        <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/pytorch-image-models/pull/2749">timm#2749</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A ported axis shift collapsed AdafactorBigVision's row factor to <code>1</code> for weights whose larger dimension comes first (e.g. an <code>[out, in]</code> layer with <code>out &gt; in</code>), silently dropping the row normalization and making the update depend on the matrix orientation</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Reduce over the retained axis so the factored update is transpose-equivariant again</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
+        <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/pytorch-image-models/pull/2750">timm#2750</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">SGDW's <code>foreach</code> path decayed the full parameter list inside the per-(device, dtype) loop, so parameters spanning more than one partition were weight-decayed <code>(1 − lr·wd)^N</code> instead of once</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Decay each group's <code>device_params</code>, matching the single-tensor path</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
+        <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/pytorch-image-models/pull/2747">timm#2747</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The three public auto-augment factory functions crashed with <code>AttributeError</code> on their documented default <code>hparams=None</code> — each function's own docstring example triggered it</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Normalize <code>hparams</code> before the <code>setdefault</code> calls, using a copy of the defaults so the shared dict isn't mutated across calls</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
+        <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/pytorch-image-models/pull/2748">timm#2748</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The documented off-values <code>inc0</code> / <code>b0</code> silently <em>enabled</em> the flag, because <code>bool('0')</code> is <code>True</code> in Python</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Parse as <code>bool(int(val))</code> so <code>0</code> disables and <code>1</code> enables, matching the docstrings</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="dbt-score" data-company-label="dbt-score" data-avatar="PicnicSupermarket">
+        <div class="top"><span class="org">dbt-score</span><a class="repo" href="https://github.com/PicnicSupermarket/dbt-score/pull/222">dbt-score#222</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The manifest formatter dropped <code>meta.score</code> and <code>meta.badge</code> for seeds and macros</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Write the score and badge to manifest meta for every entity type, not just models and sources</span></div>
+        </div>
+      </article>
 
       <article class="fix" data-company="marimo" data-company-label="marimo" data-avatar="marimo-team">
         <div class="top"><span class="org">marimo</span><a class="repo" href="https://github.com/marimo-team/marimo/pull/10617">marimo-team/marimo#10617</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
