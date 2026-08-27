@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 59 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 60 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="59 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 74 in review.">
+<meta property="og:description" content="60 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 74 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,7 +313,7 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">59</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">60</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">74</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">80</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
@@ -330,7 +330,7 @@
       <p style="margin:0"><strong>AI inference &amp; serving</strong> — batching, serving, latency · <span style="opacity:.7">openai-agents-python/js, DeepSpeed inference config, xformers attention FLOPs, keras broadcasting; vLLM &amp; SGLang in review</span></p>
       <p style="margin:0"><strong>Observability</strong> — metrics, tracing, failure diagnosis · <span style="opacity:.7">prometheus histogram compaction, opentelemetry-python View matching</span></p>
       <p style="margin:0"><strong>Data infrastructure</strong> — vector DBs, storage, retrieval · <span style="opacity:.7">qdrant-client ×2, txtai ANN ordering, mongo-python-driver, haystack; LanceDB &amp; Chroma in review</span></p>
-      <p style="margin:0"><strong>ML systems</strong> — training, quantization, fine-tuning, export · <span style="opacity:.7">NVIDIA/Megatron-LM, timm ×4 (optimizer + augmentation), huggingface/peft LoRA, coremltools ×2, timesfm; llm-compressor quantization + pruning in review</span></p>
+      <p style="margin:0"><strong>ML systems</strong> — training, quantization, fine-tuning, export · <span style="opacity:.7">NVIDIA/Megatron-LM, timm ×5 (optimizer + factory + augmentation), huggingface/peft LoRA, coremltools ×2, timesfm; llm-compressor quantization + pruning in review</span></p>
     </div>
   </section>
 
@@ -356,6 +356,14 @@
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
     <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
+
+      <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
+        <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/pytorch-image-models/pull/2754">timm#2754</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The optimizer registry crashed with <code>TypeError</code> when <code>layer_decay</code> was requested without an explicit min scale — the default <code>None</code> flowed into <code>max(None, float)</code></span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Default the layer-decay min scale to <code>0.0</code>, matching <code>create_optimizer_v2</code></span></div>
+        </div>
+      </article>
 
       <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
         <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/pytorch-image-models/pull/2749">timm#2749</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
