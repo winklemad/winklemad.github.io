@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 62 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 63 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="62 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 74 in review.">
+<meta property="og:description" content="63 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 74 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,7 +313,7 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">62</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">63</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">74</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">80</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
@@ -356,6 +356,14 @@
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
     <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
+
+      <article class="fix" data-company="sqlfluff" data-company-label="SQLFluff" data-avatar="sqlfluff">
+        <div class="top"><span class="org">SQLFluff</span><a class="repo" href="https://github.com/sqlfluff/sqlfluff/pull/8392">sqlfluff#8392</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The <code>CV11</code> shorthand-cast autofix assumed the SQL data type sat at a fixed child index, so <code>sqlfluff fix</code> rewrote <code>a[1]::INT</code> into <code>cast(cast(a as [1]) as INT)</code> — silently corrupting the array subscript in the linter's own fix output</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Locate the <code>data_type</code> child by type and preserve the full left operand</span></div>
+        </div>
+      </article>
 
       <article class="fix" data-company="google" data-company-label="Google" data-avatar="google">
         <div class="top"><span class="org">Google</span><a class="repo" href="https://github.com/google/or-tools/pull/5303">or-tools#5303</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
