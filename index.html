@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 60 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 62 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="60 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 74 in review.">
+<meta property="og:description" content="62 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 74 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,7 +313,7 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">60</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">62</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">74</div><div class="k">in review</div></div>
       <div class="stat"><div class="n">80</div><div class="k">external repo owners</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
@@ -330,7 +330,7 @@
       <p style="margin:0"><strong>AI inference &amp; serving</strong> — batching, serving, latency · <span style="opacity:.7">openai-agents-python/js, DeepSpeed inference config, xformers attention FLOPs, keras broadcasting; vLLM &amp; SGLang in review</span></p>
       <p style="margin:0"><strong>Observability</strong> — metrics, tracing, failure diagnosis · <span style="opacity:.7">prometheus histogram compaction, opentelemetry-python View matching</span></p>
       <p style="margin:0"><strong>Data infrastructure</strong> — vector DBs, storage, retrieval · <span style="opacity:.7">qdrant-client ×2, txtai ANN ordering, mongo-python-driver, haystack; LanceDB &amp; Chroma in review</span></p>
-      <p style="margin:0"><strong>ML systems</strong> — training, quantization, fine-tuning, export · <span style="opacity:.7">NVIDIA/Megatron-LM, timm ×5 (optimizer + factory + augmentation), huggingface/peft LoRA, coremltools ×2, timesfm; llm-compressor quantization + pruning in review</span></p>
+      <p style="margin:0"><strong>ML systems</strong> — training, quantization, fine-tuning, export · <span style="opacity:.7">NVIDIA/Megatron-LM, timm ×5 (optimizer + factory + augmentation), huggingface/peft LoRA, coremltools ×2, timesfm; llm-compressor pruning scheduler, google/or-tools enforced constraints; quantization in review</span></p>
     </div>
   </section>
 
@@ -356,6 +356,22 @@
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
     <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
+
+      <article class="fix" data-company="google" data-company-label="Google" data-avatar="google">
+        <div class="top"><span class="org">Google</span><a class="repo" href="https://github.com/google/or-tools/pull/5303">or-tools#5303</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>add_enforced_linear_constraint</code> wrote the indicator constraint's name, bounds and terms through the <em>non-enforced</em> helper setters using the enforced constraint's index — but enforced constraints live in a disjoint proto index space, so the writes silently corrupted an unrelated linear constraint in Google's OR-Tools solver</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Route the writes through the enforced-constraint helper setters</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="vllm-project" data-company-label="vLLM" data-avatar="vllm-project">
+        <div class="top"><span class="org">vLLM</span><a class="repo" href="https://github.com/vllm-project/llm-compressor/pull/3096">llm-compressor#3096</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The <code>polynomial_decay</code> pruning scheduler used <code>(t − 1)^exp + 1</code>, correct only for odd exponents; at the default even exponent the sparsity curve inverted — starting above the final value and <em>decreasing</em></span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Use <code>1 − (1 − t)^exp</code>, correct for every exponent</span></div>
+        </div>
+      </article>
 
       <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
         <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/pytorch-image-models/pull/2754">timm#2754</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
