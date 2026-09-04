@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 63 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 79 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="63 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 74 in review.">
+<meta property="og:description" content="79 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 73 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,9 +313,9 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">63</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">74</div><div class="k">in review</div></div>
-      <div class="stat"><div class="n">80</div><div class="k">external repo owners</div></div>
+      <div class="stat"><div class="n">79</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">73</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">59</div><div class="k">organizations</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
   </section>
@@ -841,13 +841,141 @@
         </div>
       </article>
 
+      <article class="fix" data-company="pion" data-company-label="Pion" data-avatar="pion">
+        <div class="top"><span class="org">Pion</span><a class="repo" href="https://github.com/pion/webrtc/pull/3520">pion/webrtc#3520</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A VP8 RTP payload carrying only the descriptor is legal, and <code>VP8Packet.Unmarshal</code> returns an empty payload for it without error — the IVF writer then read <code>Payload[0]</code> and panicked, so any remote peer could crash a recording process</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Skip the packet when the depacketized payload is empty, matching the guard the AV1 branch already had</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="netflix" data-company-label="Netflix" data-avatar="Netflix">
+        <div class="top"><span class="org">Netflix</span><a class="repo" href="https://github.com/Netflix/metaflow/pull/3357">metaflow#3357</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Service metadata patterns were matched unanchored, so a foreach task path prefix-matched a different task and the client resolved the wrong parent and child tasks</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Anchor the patterns so a path matches only the task it names</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="apache" data-company-label="Apache Arrow" data-avatar="apache">
+        <div class="top"><span class="org">Apache Arrow</span><a class="repo" href="https://github.com/apache/arrow-go/pull/1219">arrow-go#1219</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Concatenating a sliced <code>RunEndEncoded</code> array carried run ends past the end of the slice, and the arithmetic ran through <code>int</code>, so a run end near <code>MaxInt64</code> overflowed</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Clamp run ends to the input length and keep the arithmetic in the run-end type</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="grpc" data-company-label="gRPC" data-avatar="grpc">
+        <div class="top"><span class="org">gRPC</span><a class="repo" href="https://github.com/grpc/grpc-go/pull/9353">grpc-go#9353</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">xDS route header matchers compared header names case-sensitively, so a control plane sending a capitalised name silently matched nothing and traffic fell through to the wrong route</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Lowercase RDS route header matcher names before matching, as HTTP/2 requires</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="jest" data-company-label="Jest" data-avatar="jestjs">
+        <div class="top"><span class="org">Jest</span><a class="repo" href="https://github.com/jestjs/jest/pull/16345">jest#16345</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>jest-each</code> built a <code>RegExp</code> straight from the table's keys, so a key containing regex metacharacters produced a corrupted title or threw while naming the test</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Escape the keys, drop empty ones and match the longest first so overlapping names interpolate correctly</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="streamlink" data-company-label="Streamlink" data-avatar="streamlink">
+        <div class="top"><span class="org">Streamlink</span><a class="repo" href="https://github.com/streamlink/streamlink/pull/7075">streamlink#7075</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A DASH <code>SegmentTimeline</code> honoured the <code>@t</code> start time only on the first segment, so a timeline with a mid-stream discontinuity kept counting from the old base and requested segments that do not exist</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Honour <code>@t</code> wherever it appears, so the timeline follows the manifest across a gap</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="cattrs" data-company-label="cattrs" data-avatar="python-attrs">
+        <div class="top"><span class="org">cattrs</span><a class="repo" href="https://github.com/python-attrs/cattrs/pull/771">cattrs#771</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Structuring and unstructuring code is generated as source text, and a field renamed to a value containing a quote was interpolated raw — producing code that either failed to compile or silently read the wrong key</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Escape rename keys when generating the code so any legal rename round-trips</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="qdrant" data-company-label="Qdrant" data-avatar="qdrant">
+        <div class="top"><span class="org">Qdrant</span><a class="repo" href="https://github.com/qdrant/qdrant-client/pull/1377">qdrant-client#1377</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Local mode sorted facet values and point ids directly, so a collection mixing integer and string ids — which the server accepts — raised <code>TypeError</code> instead of returning results</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Order heterogeneous values through the same key the rest of the client already uses</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="qdrant" data-company-label="Qdrant" data-avatar="qdrant">
+        <div class="top"><span class="org">Qdrant</span><a class="repo" href="https://github.com/qdrant/qdrant-client/pull/1379">qdrant-client#1379</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Recommend, discovery, context and feedback queries in local mode ranked results with the wrong score orientation, so the in-memory backend disagreed with the server on which matches were best</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Derive the orientation per query type so local mode matches the server</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="sqlfluff" data-company-label="SQLFluff" data-avatar="sqlfluff">
+        <div class="top"><span class="org">SQLFluff</span><a class="repo" href="https://github.com/sqlfluff/sqlfluff/pull/8419">sqlfluff#8419</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Duplicate-whitespace fixes were anchored on a neighbouring segment rather than the whitespace actually removed, so <code>sqlfluff fix</code> reported edits at the wrong position</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Anchor each fix on the whitespace it removes</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="huggingface" data-company-label="Hugging Face" data-avatar="huggingface">
+        <div class="top"><span class="org">Hugging Face</span><a class="repo" href="https://github.com/huggingface/pytorch-image-models/pull/2758">timm#2758</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>--model-kwargs</code> split each value on every <code>=</code> and parsed it as a literal, so a value containing <code>=</code> or a plain string crashed the training script during argument parsing</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Split once and fall back to the raw string when the value is not a literal</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="marimo" data-company-label="marimo" data-avatar="marimo-team">
+        <div class="top"><span class="org">marimo</span><a class="repo" href="https://github.com/marimo-team/marimo/pull/10653">marimo#10653</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>ui.dictionary</code> and <code>.batch</code> were typed against an invariant mapping, so passing a dictionary of a concrete element subclass — the ordinary usage — failed type checking</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Accept a covariant <code>Mapping</code> of elements, with a type-level test pinning it</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="mckinsey" data-company-label="McKinsey" data-avatar="mckinsey">
+        <div class="top"><span class="org">McKinsey</span><a class="repo" href="https://github.com/mckinsey/vizro/pull/1849">vizro#1849</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Building a single-select selector whose options list was empty indexed the first option unconditionally and raised <code>IndexError</code>, so a dashboard filtered down to no options crashed instead of rendering empty</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Guard the empty case and leave the selector with no value</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="narwhals" data-company-label="Narwhals" data-avatar="narwhals-dev">
+        <div class="top"><span class="org">Narwhals</span><a class="repo" href="https://github.com/narwhals-dev/narwhals/pull/3891">narwhals#3891</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>str.slice(..., length=0)</code> returned the whole remainder of each string on the pandas and dask backends, because a length of zero was treated as unset — the other backends returned an empty string</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Distinguish a zero length from an absent one so every backend agrees</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="google" data-company-label="Google" data-avatar="google">
+        <div class="top"><span class="org">Google</span><a class="repo" href="https://github.com/google/adk-go/pull/1138">adk-go#1138</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Schema comparison treated <code>required</code> and the other set-valued keywords as ordered, so two schemas that differ only in the order they list the same fields compared as unequal</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Normalise the unordered keywords before comparing</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="bytedance" data-company-label="ByteDance" data-avatar="bytedance">
+        <div class="top"><span class="org">ByteDance</span><a class="repo" href="https://github.com/bytedance/deer-flow/pull/4867">deer-flow#4867</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">A skill written with a blank <code>SKILL.md</code> description was accepted at the write gate, producing a skill the loader could never surface</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Reject a blank description where the skill is written, not where it is read</span></div>
+        </div>
+      </article>
+
     </div>
   </section>
 
   <section class="review" aria-labelledby="review-h">
     <div class="sec-head">
       <h2 id="review-h">// currently in review</h2>
-      <span class="aside">74 open</span>
+      <span class="aside">73 open</span>
     </div>
     <div class="orgcloud">
       <span class="chip">Meta</span>
@@ -1026,7 +1154,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 54 merged pull requests across 47 organizations.';
+        summary.textContent = 'Showing all 79 merged pull requests across 59 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
