@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 79 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
+<meta name="description" content="Madan Kumar (winklemad) - software engineer who finds and fixes real bugs in the open-source infrastructure the industry runs on. 82 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, Apple, Docker, OpenTelemetry, Redis, Hugging Face, and more.">
 <meta property="og:title" content="Madan Kumar (winklemad) - I find and fix bugs in the code the world runs on">
-<meta property="og:description" content="79 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 73 in review.">
+<meta property="og:description" content="82 merged pull requests across Anthropic, NVIDIA, Rust, OpenAI, Meta, Google, Prometheus, MongoDB, Apple, Docker, Redis, Hugging Face, and more - plus 73 in review.">
 <meta property="og:type" content="website">
 <title>Madan Kumar (winklemad) — I find and fix bugs in the code the world runs on</title>
 <style>
@@ -313,9 +313,9 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">79</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">82</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">73</div><div class="k">in review</div></div>
-      <div class="stat"><div class="n">59</div><div class="k">organizations</div></div>
+      <div class="stat"><div class="n">60</div><div class="k">organizations</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
   </section>
@@ -969,6 +969,30 @@
         </div>
       </article>
 
+      <article class="fix" data-company="bluenviron" data-company-label="bluenviron" data-avatar="bluenviron">
+        <div class="top"><span class="org">bluenviron</span><a class="repo" href="https://github.com/bluenviron/gortsplib/pull/1155">gortsplib#1155</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The RTSP client ignored a <code>qop="auth"</code> digest challenge and always sent the legacy RFC 2069 response, so servers that require qop (most RFC 7616 implementations, and Dahua cameras) rejected every request and the stream never started</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Parse qop and send qop/cnonce/an incrementing nc with the RFC 7616 response, closing the maintainer's open issue</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="bluenviron" data-company-label="bluenviron" data-avatar="bluenviron">
+        <div class="top"><span class="org">bluenviron</span><a class="repo" href="https://github.com/bluenviron/gortsplib/pull/1154">gortsplib#1154</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The RTP/KLV decoder returned a slice pointing at its own reusable buffer, which the next <code>Decode()</code> call overwrote in place, so a caller recording or forwarding the previous unit on another goroutine read the next unit's bytes</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Give each unit its own array, matching the convention the other decoders already follow</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="streamlink" data-company-label="Streamlink" data-avatar="streamlink">
+        <div class="top"><span class="org">Streamlink</span><a class="repo" href="https://github.com/streamlink/streamlink/pull/7074">streamlink#7074</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">An HLS <code>DATERANGE</code> with a zero <code>DURATION</code> was treated as unset and fell back to <code>PLANNED-DURATION</code>; a negative duration produced an end time before the start</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Treat a zero duration as a real single instant and ignore negative durations, checked via <code>total_seconds()</code></span></div>
+        </div>
+      </article>
+
     </div>
   </section>
 
@@ -1154,7 +1178,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 79 merged pull requests across 59 organizations.';
+        summary.textContent = 'Showing all 82 merged pull requests across 60 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
