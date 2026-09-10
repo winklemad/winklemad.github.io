@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) — Technical Lead Engineer in AI Infrastructure, ML Systems and Distributed Systems. 99 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
+<meta name="description" content="Madan Kumar (winklemad) — Technical Lead Engineer in AI Infrastructure, ML Systems and Distributed Systems. 100 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
 <meta property="og:title" content="Madan Kumar — Technical Lead Engineer · AI Infrastructure / ML Systems">
-<meta property="og:description" content="AI Infrastructure / ML Systems / Distributed Systems. 99 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
+<meta property="og:description" content="AI Infrastructure / ML Systems / Distributed Systems. 100 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
 <meta property="og:type" content="website">
 <title>Madan Kumar — Technical Lead · AI Infrastructure / ML Systems (winklemad)</title>
 <style>
@@ -318,9 +318,9 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">99</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">100</div><div class="k">merged pull requests</div></div>
       <div class="stat"><div class="n">70</div><div class="k">in review</div></div>
-      <div class="stat"><div class="n">67</div><div class="k">organizations</div></div>
+      <div class="stat"><div class="n">68</div><div class="k">organizations</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
   </section>
@@ -350,7 +350,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 99 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 100 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -361,6 +361,14 @@
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
     <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
+
+      <article class="fix" data-company="fprime" data-company-label="NASA F´" data-avatar="nasa">
+        <div class="top"><span class="org">NASA F´</span><a class="repo" href="https://github.com/nasa/fprime/pull/5775">fprime#5775</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>Svc::FileWorker</code> wrote a file's <code>.CRC32</code> sidecar as a serialized big-endian value (via <code>Utils::Hash</code>) but <code>Utils::CRCChecker</code> read it back as the raw host-order <code>U32</code> bytes, so on a little-endian target a file failed the CRC check against its own freshly-written sidecar (<code>CrcFailed</code>)</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Serialize and deserialize the CRC through <code>Fw::SerialBuffer</code> in <code>CRCChecker</code>, so the sidecar is the same canonical big-endian form the rest of the framework already writes, on every target</span></div>
+        </div>
+      </article>
 
       <article class="fix" data-company="astro" data-company-label="Astro" data-avatar="withastro">
         <div class="top"><span class="org">Astro</span><a class="repo" href="https://github.com/withastro/astro/pull/17700">astro#17700</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
@@ -1319,7 +1327,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 99 merged pull requests across 67 organizations.';
+        summary.textContent = 'Showing all 100 merged pull requests across 68 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
