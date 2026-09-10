@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) — Technical Lead Engineer in AI Infrastructure, ML Systems and Distributed Systems. 94 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
+<meta name="description" content="Madan Kumar (winklemad) — Technical Lead Engineer in AI Infrastructure, ML Systems and Distributed Systems. 98 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
 <meta property="og:title" content="Madan Kumar — Technical Lead Engineer · AI Infrastructure / ML Systems">
-<meta property="og:description" content="AI Infrastructure / ML Systems / Distributed Systems. 94 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
+<meta property="og:description" content="AI Infrastructure / ML Systems / Distributed Systems. 98 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
 <meta property="og:type" content="website">
 <title>Madan Kumar — Technical Lead · AI Infrastructure / ML Systems (winklemad)</title>
 <style>
@@ -318,9 +318,9 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">94</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">73</div><div class="k">in review</div></div>
-      <div class="stat"><div class="n">60</div><div class="k">organizations</div></div>
+      <div class="stat"><div class="n">98</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">71</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">66</div><div class="k">organizations</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
   </section>
@@ -350,7 +350,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 54 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 98 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -361,6 +361,134 @@
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
     <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
+
+      <article class="fix" data-company="qdrant" data-company-label="Qdrant" data-avatar="qdrant">
+        <div class="top"><span class="org">Qdrant</span><a class="repo" href="https://github.com/qdrant/qdrant-client/pull/1407">qdrant-client#1407</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">In local mode, <code>delete_payload</code> only removed top-level keys, so a JSON-path key like <code>a.b</code> or <code>location[].name</code> was a silent no-op — diverging from the server, which deletes the nested key and keeps the rest of the payload</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Walk the JSON path (including array-index and <code>[]</code> cases) to delete the nested key, matching the server</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="marimo" data-company-label="marimo" data-avatar="marimo-team">
+        <div class="top"><span class="org">marimo</span><a class="repo" href="https://github.com/marimo-team/marimo/pull/10649">marimo#10649</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>mo.ui.date_range</code> fell back to <code>(today, today)</code> when only one of <code>start</code>/<code>stop</code> was given, so the widget initialized outside its own declared range and the <code>None</code>-value path skipped bounds validation</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Clamp the default to the supplied bound (<code>start=X</code> → <code>(X, X)</code>), matching <code>mo.ui.date</code>/<code>datetime</code></span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="pytorch-optimizer" data-company-label="pytorch-optimizer" data-avatar="kozistr">
+        <div class="top"><span class="org">pytorch-optimizer</span><a class="repo" href="https://github.com/kozistr/pytorch_optimizer/pull/524">pytorch_optimizer#524</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>A2Grad</code>'s running-mean update weighted the increment by <code>step + 1</code> instead of the reciprocal <code>1 / step</code>, so <code>avg_grad</code> overshot every step and diverged to NaN within ~35 steps for any input</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Use the correct <code>1 / step</code> weight so the running mean converges</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="pytorch-optimizer" data-company-label="pytorch-optimizer" data-avatar="kozistr">
+        <div class="top"><span class="org">pytorch-optimizer</span><a class="repo" href="https://github.com/kozistr/pytorch_optimizer/pull/523">pytorch_optimizer#523</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>AdaShift</code> NaN'd on its first update whenever <code>keep_num &gt; 1</code> (the default is 10): the gradient queue was pre-seeded, so it filled a step early and the first update used a negative bias correction — <code>sqrt</code> of a negative</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Initialize the gradient deque empty instead of pre-seeded, so the first debiased update stays finite</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="pytorch-optimizer" data-company-label="pytorch-optimizer" data-avatar="kozistr">
+        <div class="top"><span class="org">pytorch-optimizer</span><a class="repo" href="https://github.com/kozistr/pytorch_optimizer/pull/522">pytorch_optimizer#522</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>AdaSmooth</code>'s efficiency ratio divides running signed movement by running absolute movement; on the first step a zero-initialized parameter has not moved, so the update is <code>0 / 0 = NaN</code> and permanently corrupts it</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Add <code>eps</code> to the denominator so a not-yet-moved parameter yields a finite ratio</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="bluenviron" data-company-label="bluenviron" data-avatar="bluenviron">
+        <div class="top"><span class="org">bluenviron</span><a class="repo" href="https://github.com/bluenviron/gortsplib/pull/1161">gortsplib#1161</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The RTP/MJPEG header guard <code>Quantization &gt; 99 &amp;&amp; &lt; 127</code> let reserved value <code>127</code> through to <code>makeQuantizationTables(127)</code>, where <code>scale = 200 - 2*127 = -54</code> built a corrupt quantization table instead of rejecting it</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Widen the guard to <code>&lt; 128</code> so all reserved values 100–127 are rejected</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="nats" data-company-label="NATS" data-avatar="nats-io">
+        <div class="top"><span class="org">NATS</span><a class="repo" href="https://github.com/nats-io/nats-server/pull/8568">nats-server#8568</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The <code>left</code>/<code>right</code> mapping functions shipped in 2.10.16 were never added to <code>ValidateMapping</code>'s allowlist, so a config using <code>{{left(...)}}</code>/<code>{{right(...)}}</code> was rejected as an unknown function and the server refused to start</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Add <code>left</code>/<code>right</code> to the allowlist so the shipped functions are reachable from config</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="hlsjs" data-company-label="hls.js" data-avatar="video-dev">
+        <div class="top"><span class="org">hls.js</span><a class="repo" href="https://github.com/video-dev/hls.js/pull/8028">hls.js#8028</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">In <code>matchesOption</code>, the ASSOC-LANGUAGE clause was gated on <code>lang</code> instead of <code>assocLang</code>, so an option requesting a specific <code>assocLang</code> (without constraining <code>lang</code>) matched tracks with a different assocLang</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Gate the clause on its own variable: <code>assocLang === undefined || track.assocLang === assocLang</code></span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="vllm-project" data-company-label="vLLM" data-avatar="vllm-project">
+        <div class="top"><span class="org">vLLM</span><a class="repo" href="https://github.com/vllm-project/llm-compressor/pull/3095">llm-compressor#3095</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The default <code>MovingAverageMSEObserver</code> was missing the <code>expand &gt;= 1.0</code> check that <code>MemorylessMSEObserver</code> has, so <code>expand &lt; 1.0</code> started the MSE search below the observed range and could never grow to cover the data — clipping every calibration value</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Validate <code>expand &gt;= 1.0</code> in the moving-average observer too</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="lancedb" data-company-label="LanceDB" data-avatar="lancedb">
+        <div class="top"><span class="org">LanceDB</span><a class="repo" href="https://github.com/lancedb/lancedb/pull/4028">lancedb#4028</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">An async hybrid query with <code>.offset()</code> pushed the offset into both sub-queries, so the reranked results repeated first-page rows and silently dropped others</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Apply the offset once when combining the fused results and raise the sub-query limits to cover the skipped prefix</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="grafana" data-company-label="Grafana" data-avatar="grafana">
+        <div class="top"><span class="org">Grafana</span><a class="repo" href="https://github.com/grafana/grafana-plugin-sdk-go/pull/1613">grafana-plugin-sdk-go#1613</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>FrameTypeVersion.Less</code>/<code>Greater</code> compared major and minor together, producing contradictory ordering across major versions</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Compare the major component first and the minor only when the majors are equal</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="sqlfluff" data-company-label="SQLFluff" data-avatar="sqlfluff">
+        <div class="top"><span class="org">SQLFluff</span><a class="repo" href="https://github.com/sqlfluff/sqlfluff/pull/8399">sqlfluff#8399</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>_get_lambda_argument_columns</code> asserted every <code>-&gt;</code> was a lambda arrow, so a binary/JSON arrow like <code>1::json -&gt; 'a'</code> (duckdb/trino) hit a hard assert and made 7 rules report "Unexpected exception" on valid SQL</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Guard the lambda case — when the left of <code>-&gt;</code> isn't a single lambda parameter, skip it instead of asserting</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="drf" data-company-label="Django REST framework" data-avatar="encode">
+        <div class="top"><span class="org">Django REST framework</span><a class="repo" href="https://github.com/encode/django-rest-framework/pull/9998">django-rest-framework#9998</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>FloatField</code> accepted non-finite floats (<code>nan</code>, <code>inf</code>, <code>"1e400"</code>), returning <code>float('nan')</code>/<code>float('inf')</code> — the only DRF numeric field without a finiteness guard</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Reject non-finite values with a <code>ValidationError</code>, matching <code>IntegerField</code>/<code>DecimalField</code></span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="narwhals" data-company-label="Narwhals" data-avatar="narwhals-dev">
+        <div class="top"><span class="org">Narwhals</span><a class="repo" href="https://github.com/narwhals-dev/narwhals/pull/3920">narwhals#3920</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>ArrowSeries.shift(n)</code> padded with <code>n</code> nulls without capping <code>n</code> at the length, so shifting by more than the length grew the series and desynced the rolling functions (<code>ArrowInvalid</code>)</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Cap the null padding at the series length, so an over-long shift returns an all-null series of the same length</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="narwhals" data-company-label="Narwhals" data-avatar="narwhals-dev">
+        <div class="top"><span class="org">Narwhals</span><a class="repo" href="https://github.com/narwhals-dev/narwhals/pull/3906">narwhals#3906</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">On the pyarrow backend, <code>clip</code> replaced a <strong>null in the data</strong> with a clip bound instead of preserving it — <code>[1, None, 3].clip(0, 2)</code> gave <code>[1, 2, 3]</code> where polars keeps <code>[1, None, 2]</code></span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Preserve nulls through <code>clip</code>/<code>clip_lower</code>/<code>clip_upper</code></span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="bluenviron" data-company-label="bluenviron" data-avatar="bluenviron">
+        <div class="top"><span class="org">bluenviron</span><a class="repo" href="https://github.com/bluenviron/gortsplib/pull/1153">gortsplib#1153</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The RTP/AV1 packetizer set the <code>Y</code>/<code>Z</code> continuation bits even when no OBU bytes were written, producing a malformed aggregation header</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Only set <code>Y</code>/<code>Z</code> when OBU bytes were actually written</span></div>
+        </div>
+      </article>
 
       <article class="fix" data-company="sqlfluff" data-company-label="SQLFluff" data-avatar="sqlfluff">
         <div class="top"><span class="org">SQLFluff</span><a class="repo" href="https://github.com/sqlfluff/sqlfluff/pull/8392">sqlfluff#8392</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
@@ -1183,7 +1311,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 94 merged pull requests across 60 organizations.';
+        summary.textContent = 'Showing all 98 merged pull requests across 66 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
