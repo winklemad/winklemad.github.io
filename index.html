@@ -3,9 +3,9 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="description" content="Madan Kumar (winklemad) — Technical Lead Engineer in AI Infrastructure, ML Systems and Distributed Systems. 100 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
+<meta name="description" content="Madan Kumar (winklemad) — Technical Lead Engineer in AI Infrastructure, ML Systems and Distributed Systems. 105 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
 <meta property="og:title" content="Madan Kumar — Technical Lead Engineer · AI Infrastructure / ML Systems">
-<meta property="og:description" content="AI Infrastructure / ML Systems / Distributed Systems. 100 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
+<meta property="og:description" content="AI Infrastructure / ML Systems / Distributed Systems. 105 merged open-source bug-fix PRs across OpenAI, Google, NVIDIA, Meta, Apple, Anthropic and more.">
 <meta property="og:type" content="website">
 <title>Madan Kumar — Technical Lead · AI Infrastructure / ML Systems (winklemad)</title>
 <style>
@@ -318,9 +318,9 @@
 
   <section class="stats" aria-label="By the numbers">
     <div class="statgrid">
-      <div class="stat"><div class="n">100</div><div class="k">merged pull requests</div></div>
-      <div class="stat"><div class="n">70</div><div class="k">in review</div></div>
-      <div class="stat"><div class="n">68</div><div class="k">organizations</div></div>
+      <div class="stat"><div class="n">105</div><div class="k">merged pull requests</div></div>
+      <div class="stat"><div class="n">69</div><div class="k">in review</div></div>
+      <div class="stat"><div class="n">71</div><div class="k">organizations</div></div>
       <div class="stat"><div class="n">6</div><div class="k">languages</div></div>
     </div>
   </section>
@@ -350,7 +350,7 @@
           <span class="symbol" aria-hidden="true">⌘</span><span id="company-menu-label">Choose company</span><span class="chevron" aria-hidden="true">⌄</span>
         </button>
         <button class="filter-btn all-filter" type="button" data-filter="all" aria-pressed="false" aria-controls="merged-fixes">
-          <span class="symbol" aria-hidden="true">↳</span><span>All 100 fixes</span>
+          <span class="symbol" aria-hidden="true">↳</span><span>All 104 fixes</span>
         </button>
       </div>
       <div class="company-menu" id="company-menu" hidden>
@@ -361,6 +361,38 @@
     <p class="filter-summary" id="filter-summary" aria-live="polite"></p>
     <div class="filter-empty" id="filter-empty" hidden>Select a company above to see its merged pull requests.</div>
     <div class="fixes" id="merged-fixes">
+
+      <article class="fix" data-company="kornia" data-company-label="Kornia" data-avatar="kornia">
+        <div class="top"><span class="org">Kornia</span><a class="repo" href="https://github.com/kornia/kornia/pull/4378">kornia#4378</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t"><code>ycbcr_to_rgb</code> used rounded coefficients that were not the exact inverse of <code>rgb_to_ycbcr</code>'s, so an <code>rgb → ycbcr → rgb</code> round trip drifted by ~2.7e-4 instead of being lossless</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Use the exact algebraic inverse of the forward coefficients; round trip is now lossless to floating-point precision</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="xerj" data-company-label="XERJ" data-avatar="xerj-org">
+        <div class="top"><span class="org">XERJ</span><a class="repo" href="https://github.com/xerj-org/xerj/pull/920">xerj#920</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The 12-hour date format converted PM but forgot AM, so <code>12:30 AM</code> resolved to <code>12:30</code> not <code>00:30</code>; a <code>hh:mm a</code> midnight range built an inverted bound that silently dropped every midnight-hour document</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Convert AM 12 to hour 0, matching the java.time semantics Elasticsearch uses</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="bluenviron" data-company-label="bluenviron" data-avatar="bluenviron">
+        <div class="top"><span class="org">bluenviron</span><a class="repo" href="https://github.com/bluenviron/gortsplib/pull/1162">gortsplib#1162</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">The MPEG-4-audio LATM depacketizer panicked on a valid stream where a later layer reuses an earlier layer's config (a nil <code>AudioSpecificConfig</code>) — a nil dereference from real RTSP input</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Skip layers that carry no config instead of dereferencing it</span></div>
+        </div>
+      </article>
+
+      <article class="fix" data-company="claude-mem" data-company-label="claude-mem" data-avatar="thedotmack">
+        <div class="top"><span class="org">claude-mem</span><a class="repo" href="https://github.com/thedotmack/claude-mem/pull/3176">claude-mem#3176</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
+        <div class="body">
+          <div class="dline m"><span class="mark">-</span><span class="t">Empty-title observations were written into the recency window at capture, polluting cross-session memory with blank entries</span></div>
+          <div class="dline p"><span class="mark">+</span><span class="t">Skip empty-title observations at capture so the recency window stays meaningful</span></div>
+        </div>
+      </article>
 
       <article class="fix" data-company="fprime" data-company-label="NASA F´" data-avatar="nasa">
         <div class="top"><span class="org">NASA F´</span><a class="repo" href="https://github.com/nasa/fprime/pull/5775">fprime#5775</a><span class="spacer"></span><span class="pill"><span class="dot"></span>MERGED</span></div>
@@ -1327,7 +1359,7 @@
         summary.textContent = 'No company selected.';
       } else if (filter === 'all') {
         menuLabel.textContent = 'Choose company';
-        summary.textContent = 'Showing all 100 merged pull requests across 68 organizations.';
+        summary.textContent = 'Showing all 104 fixes across 71 organizations.';
       } else {
         var company = companies.get(filter);
         var noun = visible.length === 1 ? 'fix' : 'fixes';
